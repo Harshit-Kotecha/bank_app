@@ -9,9 +9,9 @@ class DashboardController extends BaseController {
   RxInt selectedTabIndex = RxInt(0);
 
   final widgetOptions = [
-    HomeScreen(),
+    const HomeScreen(),
     TransferScreen(),
-    CardsScreen(),
-    AccountScreen(),
+    const CardsScreen(),
+    const AccountScreen(),
   ];
 }

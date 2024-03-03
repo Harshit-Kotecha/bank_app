@@ -1,5 +1,5 @@
 abstract class NamedRoutes {
-  static const loginScreen = '/loginView';
+  static const signinScreen = '/loginView';
   static const otpScreen = '/otpScreen';
   static const dashboardScreen = '/dashboardScreen';
   static const myAccount = '/myAccount';

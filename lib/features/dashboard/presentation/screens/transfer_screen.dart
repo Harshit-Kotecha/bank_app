@@ -2,15 +2,12 @@ import 'package:bank_app/constants/app_colors.dart';
 import 'package:bank_app/features/dashboard/data/controller/transfer_money_controller.dart';
 import 'package:bank_app/features/dashboard/presentation/widgets/card_profile.dart';
 import 'package:bank_app/features/dashboard/presentation/widgets/my_app_bar.dart';
-import 'package:bank_app/routing/app_routes.dart';
 import 'package:bank_app/routing/named_routes.dart';
 import 'package:bank_app/routing/navigation_handler.dart';
 import 'package:bank_app/utils/dimensions.dart';
 import 'package:bank_app/widgets/app_elevated_button.dart';
 import 'package:bank_app/widgets/spacing.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class TransferScreen extends StatelessWidget {

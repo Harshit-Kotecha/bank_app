@@ -15,6 +15,7 @@ class SplashController extends BaseController {
   }
 
   Future<void> handleLoginFlow() async {
+    // NavigationHandler.removeAllNavigateTo(NamedRoutes.signinScreen);
     NavigationHandler.removeAllNavigateTo(NamedRoutes.dashboardScreen);
   }
 }
