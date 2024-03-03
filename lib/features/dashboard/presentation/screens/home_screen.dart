@@ -4,6 +4,8 @@ import 'package:bank_app/core/custom_text.dart';
 import 'package:bank_app/core/custom_text_style.dart';
 import 'package:bank_app/features/dashboard/presentation/widgets/icon_container.dart';
 import 'package:bank_app/features/dashboard/presentation/widgets/transaction_tile.dart';
+import 'package:bank_app/routing/named_routes.dart';
+import 'package:bank_app/routing/navigation_handler.dart';
 import 'package:bank_app/utils/dimensions.dart';
 import 'package:bank_app/widgets/spacing.dart';
 import 'package:flutter/material.dart';
@@ -172,10 +174,15 @@ class HomeScreen extends StatelessWidget {
             color: AppColors.primaryColor,
           ),
         ),
-        CustomText(
-          text: "See All",
-          textStyle: CustomTextStyle.textStyle12R(
-            context,
+        GestureDetector(
+          onTap: () {
+            NavigationHandler.navigateTo(NamedRoutes.insightsScreen);
+          },
+          child: CustomText(
+            text: "See All",
+            textStyle: CustomTextStyle.textStyle12R(
+              context,
+            ),
           ),
         ),
       ],

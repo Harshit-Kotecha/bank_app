@@ -59,6 +59,9 @@ dependencies:
   workmanager: ^0.5.2
   flutter_eval: ^0.7.2
   intl: ^0.19.0
+  fl_chart: ^0.66.2
+  percent_indicator: ^4.2.3
+  firebase_core: ^2.25.5
 
 dev_dependencies:
   flutter_test:

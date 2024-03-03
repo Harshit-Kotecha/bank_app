@@ -4,4 +4,5 @@ abstract class NamedRoutes {
   static const dashboardScreen = '/dashboardScreen';
   static const myAccount = '/myAccount';
   static const receiptScreen = '/receiptScreen';
+  static const insightsScreen = '/insightsScreen';
 }
