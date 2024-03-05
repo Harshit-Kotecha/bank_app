@@ -1,12 +1,15 @@
 import 'package:bank_app/constants/app_colors.dart';
 import 'package:bank_app/core/custom_text.dart';
 import 'package:bank_app/core/custom_text_style.dart';
+import 'package:bank_app/features/dashboard/data/models/transaction_model.dart';
 import 'package:bank_app/utils/dimensions.dart';
 import 'package:bank_app/widgets/spacing.dart';
 import 'package:flutter/material.dart';
 
 class PaymentTile extends StatelessWidget {
-  const PaymentTile({super.key});
+  const PaymentTile({super.key, required this.transactionModel});
+
+  final TransactionModel transactionModel;
 
   @override
   Widget build(BuildContext context) {
@@ -40,11 +43,13 @@ class PaymentTile extends StatelessWidget {
             ],
           ),
           CustomText(
-            text: "+£25,000",
+            text:
+                "${transactionModel.isCredit ? '+' : '-'}£${transactionModel.amount}",
             textStyle: TextStyle(
               fontSize: scaleW(context, 15),
               fontWeight: FontWeight.w500,
-              color: AppColors.green,
+              color:
+                  transactionModel.isCredit ? AppColors.green : AppColors.red,
             ),
           ),
         ],

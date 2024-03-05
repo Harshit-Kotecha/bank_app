@@ -1,4 +1,5 @@
 import 'package:bank_app/constants/app_strings.dart';
+import 'package:bank_app/features/auth/data/services/auth_service.dart';
 import 'package:bank_app/routing/named_routes.dart';
 import 'package:bank_app/routing/navigation_handler.dart';
 import 'package:bank_app/utils/shared_pref.dart';
@@ -62,8 +63,13 @@ mixin NetworkHandlingMixin {
     dio.DioException error,
     dio.ErrorInterceptorHandler handler,
   ) async {
-    await SharedPref.clearAllData();
-    NavigationHandler.offAllNamed(NamedRoutes.signinScreen);
+    final result = await AuthService.hasTokenRefreshed();
+    if (result) {
+      NavigationHandler.removeAllNavigateTo('/');
+    } else {
+      await SharedPref.clearAllData();
+      NavigationHandler.removeAllNavigateTo(NamedRoutes.signinScreen);
+    }
     return handler.next(error);
   }
 

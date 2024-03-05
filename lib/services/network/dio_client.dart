@@ -1,4 +1,3 @@
-
 import 'package:bank_app/utils/shared_pref.dart';
 import 'package:dio/dio.dart';
 import 'interceptor/network_interceptor.dart';
@@ -65,7 +64,7 @@ class DioClient {
 
   static void initBaseOption({String? baseUrl}) {
     _options = BaseOptions(
-      baseUrl: "http://localhost:4040",
+      baseUrl: "https://d403-49-36-238-84.ngrok-free.app/",
       connectTimeout: const Duration(milliseconds: 1000 * 120),
       receiveTimeout: const Duration(milliseconds: 12000),
       receiveDataWhenStatusError: true,

@@ -17,6 +17,7 @@ class CustomTextField extends StatefulWidget {
   final String underlineText;
   final String? suffixText;
   final bool? hasSuffixIcon;
+  final bool readOnly;
 
   const CustomTextField({
     super.key,
@@ -31,6 +32,7 @@ class CustomTextField extends StatefulWidget {
     this.underlineText = "",
     this.suffixText,
     this.hasSuffixIcon,
+    this.readOnly = false,
   });
 
   @override
@@ -73,6 +75,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           ),
           keyboardType: widget.keyboardType,
           obscureText: _obscureText,
+          readOnly: widget.readOnly,
           decoration: InputDecoration(
             suffixIcon: (widget.hasSuffixIcon == true)
                 ? IconButton(
@@ -98,7 +101,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
             errorText: error,
             labelStyle: TextStyle(color: AppColors.neutrals_500),
             fillColor: AppColors.neutralsWhite,
-            filled: true,
+            // filled: false,
             hintStyle: const TextStyle(color: AppColors.f969696),
             contentPadding: const EdgeInsets.all(10),
             enabledBorder: OutlineInputBorder(

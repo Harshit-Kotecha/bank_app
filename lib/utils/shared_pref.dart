@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const String kToken = "token";
+const String refreshToken = "refreshToken";
 const String kuser = "kuserName";
 const String kblock = 'kblock';
 const String kclf = "kclf";
@@ -20,6 +21,10 @@ const String kUserLong = "user_long";
 const String kUserId = "userId";
 const String kPushToken = "pushToken";
 const String kFormVersion = "KformVersion";
+const String username = "username";
+const String firstName = "firstName";
+const String lastName = "lastName";
+const String userKey = "userKey";
 
 class SharedPref {
 // To Clear All data from SharedPreferences
@@ -29,13 +34,9 @@ class SharedPref {
   }
 
   // To get the authentication token
-  static Future<String> getToken() async {
+  static Future<String?> getToken() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    if (prefs.getString(kToken) is String) {
-      return prefs.getString(kToken) ?? "";
-    } else {
-      return "";
-    }
+    return prefs.getString(kToken);
   }
 
   // Set token in preferences

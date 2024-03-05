@@ -5,11 +5,14 @@ import 'package:bank_app/utils/base_controller.dart';
 import 'package:bank_app/utils/custom_print.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthController extends BaseController {
   final TextEditingController userNameTextController = TextEditingController();
   final TextEditingController passwordTextController = TextEditingController();
+
+  RxBool isLoading = RxBool(false);
 
   UserCredential? userCredential;
   Future<void> signInWithGoogle() async {
@@ -37,10 +40,12 @@ class AuthController extends BaseController {
     }
   }
 
-  void signIn() {
-    AuthService.signIn(
-      username: userNameTextController.text,
+  Future<void> signIn() async {
+    isLoading.value = true;
+    await AuthService.signIn(
+      name: userNameTextController.text,
       password: passwordTextController.text,
     );
+    isLoading.value = false;
   }
 }

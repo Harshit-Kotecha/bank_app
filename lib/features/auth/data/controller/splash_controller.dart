@@ -2,6 +2,7 @@ import 'package:bank_app/routing/named_routes.dart';
 import 'package:bank_app/routing/navigation_handler.dart';
 import 'package:bank_app/services/network/dio_client.dart';
 import 'package:bank_app/utils/base_controller.dart';
+import 'package:bank_app/utils/shared_pref.dart';
 import 'package:get/get.dart';
 
 class SplashController extends BaseController {
@@ -18,6 +19,11 @@ class SplashController extends BaseController {
   }
 
   Future<void> handleLoginFlow() async {
-    NavigationHandler.removeAllNavigateTo(NamedRoutes.welcomeScreen);
+    final token = await SharedPref.getToken();
+    if (token == null) {
+      NavigationHandler.removeAllNavigateTo(NamedRoutes.welcomeScreen);
+    } else {
+      NavigationHandler.removeAllNavigateTo(NamedRoutes.dashboardScreen);
+    }
   }
 }

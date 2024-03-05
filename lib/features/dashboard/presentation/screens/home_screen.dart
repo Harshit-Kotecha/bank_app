@@ -2,6 +2,8 @@ import 'package:bank_app/constants/app_colors.dart';
 import 'package:bank_app/constants/assets.dart';
 import 'package:bank_app/core/custom_text.dart';
 import 'package:bank_app/core/custom_text_style.dart';
+import 'package:bank_app/features/dashboard/data/controller/dashboard_controller.dart';
+import 'package:bank_app/features/dashboard/data/controller/home_controller.dart';
 import 'package:bank_app/features/dashboard/presentation/widgets/icon_container.dart';
 import 'package:bank_app/features/dashboard/presentation/widgets/transaction_tile.dart';
 import 'package:bank_app/routing/named_routes.dart';
@@ -10,9 +12,12 @@ import 'package:bank_app/utils/dimensions.dart';
 import 'package:bank_app/widgets/spacing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  HomeScreen({super.key});
+
+  final HomeController homeController = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
@@ -29,15 +34,17 @@ class HomeScreen extends StatelessWidget {
             Spacing.verticalSpacing(context, 20),
             _seeTransactions(context),
             Spacing.verticalSpacing(context, 20),
-            Expanded(
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  return TransactionTile(
-                    index: index,
-                  );
-                },
+            Obx(
+              () => Expanded(
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: homeController.transactions.length,
+                  itemBuilder: (context, index) {
+                    return TransactionTile(
+                      transactionModel: homeController.transactions[index],
+                    );
+                  },
+                ),
               ),
             )
           ],
@@ -47,24 +54,26 @@ class HomeScreen extends StatelessWidget {
   }
 
   _welcomeHeader(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        CustomText(
-          text: "Good Evening,",
-          textStyle: CustomTextStyle.textStyle12R(
-            context,
-            color: AppColors.lightTitleText,
+    return Obx(
+      () => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CustomText(
+            text: "Good ${homeController.greeting.value},",
+            textStyle: CustomTextStyle.textStyle12R(
+              context,
+              color: AppColors.lightTitleText,
+            ),
           ),
-        ),
-        CustomText(
-          text: "Sarah Tucker",
-          textStyle: CustomTextStyle.textStyle20Bold(
-            context,
-            color: AppColors.primaryColor,
+          CustomText(
+            text: homeController.name.value,
+            textStyle: CustomTextStyle.textStyle20Bold(
+              context,
+              color: AppColors.primaryColor,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -144,7 +153,7 @@ class HomeScreen extends StatelessWidget {
         ),
         IconContainer(
           assets: Assets.recieveSvg,
-          text: "Recieve",
+          text: "Receive",
           onTap: () {},
         ),
         IconContainer(

@@ -20,4 +20,6 @@ abstract class Assets {
   static const String backSvg = '$_baseSvgPath/back.svg';
   static const String successSvg = '$_baseSvgPath/success.svg';
   static const String googleSvg = '$_baseSvgPath/google.svg';
+  static const String downArrowSvg = '$_baseSvgPath/down_arrow.svg';
+  static const String mastercardSvg = '$_baseSvgPath/mastercard.svg';
 }

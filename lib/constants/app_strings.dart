@@ -277,30 +277,6 @@ abstract class AppStrings {
   static String get userDetailNotUpdated =>
       localized('User Details Not Updated Please Try Again');
 
-  static String get emptyMyComplaint => localized(
-        'Your complaints will start appearing here once you raise them',
-      );
-
-  static String get emptyNearByComplaint => localized(
-        'No Complaints in your selected location. Please try other location',
-      );
-
-  static String get governmentOfChhatisgarh =>
-      localized('Government of Chhatisgarh');
-
-  // 11 sept
-  static String get uploadPdf => localized("Upload PDF");
-  // 11 sep
-  static String get fieldOfficer => localized('Field Officer');
-  static String get action => localized('Action');
-  static String get officerAssignedStatus =>
-      localized('Solve the issue and include pictures/videos of the solution');
-  static String get resolveComplaints => localized('Resolve Complaint');
-  static String get officerEscalatedStatus =>
-      localized('The complaint has been escalated to the nodal officer');
-  static String get officerInReviewStatus =>
-      localized('Your resolution is currently under review');
-
   static String get fromGallery => localized('From gallery');
 
   static String get resolvedTill => localized('Resolve till');
@@ -324,78 +300,8 @@ abstract class AppStrings {
         'Please choose the reason why you are rejecting this complaint',
       );
   static String get other => localized('Other');
-  // 22 sep
-
-  static String get addPhotovideo => localized('Add photo/video');
-  static String get tellUsWhatYouDisLikedAboutUs =>
-      localized('Tell us what was dissatisfying for you');
-  static String get reopenComplaint => localized('Reopen the complaint');
-  static String get reopenComplaintDescription =>
-      localized('Would you like to reopen the complaint?');
-  static String get addPhoto => localized('Add photo');
-  static String get youCanAdd1Photo =>
-      localized('You can add 1 photo or video');
-  static String get writeReason => localized('Write reason');
-  static String get reportUser =>
-      localized('Would you like to report this user?');
-  static String get userReported => localized('User reported');
-  static String get userReportedReason => localized(
-        'The user has been reported. The admin will look into the matter',
-      );
   static String get notifications => localized('Notifications');
   static String get noRecordFound => localized('No Record Found');
-
-  // 26 dec
-  static String get getHelp => localized('Get Help');
-
-  static String get onlyOnePdf => localized('You can upload only one pdf');
-  static String get oneMoreRequired => localized('One Media required');
-  static String get pleaseProvide =>
-      localized('please provide atleast one media (image, video or pdf)');
-
-// 28 dec
-  static String get selectDateRange => localized('Select date range');
-  static String get from => localized('From');
-  static String get to => localized('To');
-  static String get download => localized('Download');
-  static String get viewReport => localized('View report');
-  static String get downloadType => localized('Download type');
-  static String get complaintWise =>
-      localized('Complaint - wise pendency report');
-
-  // 3 jan
-  static String get assingComplaint => localized('Assign complaint');
-  static String get addMessageOptional => localized('Add message (optional)');
-
-  static String get takeaction => localized('Take action');
-
-  static String get chooseOneOfTheFollowingToResolveComplaint =>
-      localized('Choose one of the following to resolve this complaint');
-
-  static String get previouslyAssigned => localized('Previously assigned');
-
-  static String get mainUsOn => localized('Mail us on');
-  static String get complaintRejected => localized('Complaint rejected');
-  static String get complaintIrrelevant =>
-      localized('The complaint is irrelevant and hence it has been rejected.');
-  static String get sentToDistrict => localized('Sent to District Dept. admin');
-  static String get sentToDistrictDetail =>
-      localized('The complaint has been sent to District Dept. Admin');
-
-  static String get notOperational =>
-      localized('Currently, we are not operational at the provided location.');
-
-  // 4 jan
-  static String get trackHistory => localized("Track History");
-
-  static String get assign => localized("Assign");
-  static String get toBeAccepted => localized("To be accepted");
-  static String get toBeAssigned => localized("To be assigned");
-  static String get assigned => localized("Assigned");
-  static String get inReview => localized("In review");
-  static String get reopened => localized("Reopened");
-  static String get yourReview => localized("Your review");
-  static String get reopenAndAssign => localized("Reopen and assign");
 
   // 22 jan
   static String get addPhotoVideosOrPdf =>

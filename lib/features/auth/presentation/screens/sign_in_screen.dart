@@ -1,8 +1,11 @@
+import 'dart:ffi';
+
 import 'package:bank_app/constants/app_colors.dart';
 import 'package:bank_app/constants/assets.dart';
 import 'package:bank_app/core/custom_text.dart';
 import 'package:bank_app/core/custom_text_style.dart';
 import 'package:bank_app/features/auth/data/controller/auth_controller.dart';
+import 'package:bank_app/features/dashboard/presentation/widgets/progress_widget.dart';
 import 'package:bank_app/utils/dimensions.dart';
 import 'package:bank_app/widgets/app_elevated_button.dart';
 import 'package:bank_app/widgets/custom_text_field.dart';
@@ -20,29 +23,37 @@ class SignInScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: scaleW(context, 25.5), vertical: scaleH(context, 8)),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Spacing.verticalSpacing(context, 30),
-                _welcomeWidget(context),
-                Spacing.verticalSpacing(context, 32),
-                CustomTextField(
-                  labelText: "Username",
-                  controller: _authController.userNameTextController,
-                ),
-                Spacing.verticalSpacing(context, 16),
-                CustomTextField(
-                  labelText: "Password",
-                  controller: _authController.passwordTextController,
-                ),
-                Spacing.verticalSpacing(context, 24),
-                AppElevatedButton(
-                    title: "Sign In", onPress: _authController.signIn),
-              ],
-            ),
+        child: Obx(
+          () => Padding(
+            padding: EdgeInsets.symmetric(
+                horizontal: scaleW(context, 25.5),
+                vertical: scaleH(context, 8)),
+            child: _authController.isLoading.value
+                ? const Center(
+                    child: ProgressWidget(),
+                  )
+                : SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Spacing.verticalSpacing(context, 30),
+                        _welcomeWidget(context),
+                        Spacing.verticalSpacing(context, 32),
+                        CustomTextField(
+                          labelText: "Enter you username",
+                          controller: _authController.userNameTextController,
+                        ),
+                        Spacing.verticalSpacing(context, 16),
+                        CustomTextField(
+                          labelText: "Enter your password",
+                          controller: _authController.passwordTextController,
+                          hasSuffixIcon: true,
+                        ),
+                        Spacing.verticalSpacing(context, 24),
+                        AppElevatedButton(
+                            title: "Sign In", onPress: _authController.signIn),
+                      ],
+                    ),
+                  ),
           ),
         ),
       ),

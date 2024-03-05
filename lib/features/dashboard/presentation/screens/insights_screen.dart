@@ -71,9 +71,13 @@ class InsightsScreen extends StatelessWidget {
                 Expanded(
                   child: ListView.builder(
                     shrinkWrap: true,
-                    itemCount: 10,
+                    itemCount: insightsController.transactions.length,
+                    controller: insightsController.scrollController,
                     itemBuilder: (context, index) {
-                      return const PaymentTile();
+                      return PaymentTile(
+                        transactionModel:
+                            insightsController.transactions[index],
+                      );
                     },
                   ),
                 ),
@@ -155,6 +159,7 @@ class InsightsScreen extends StatelessWidget {
   _getPaymentsTab(int index, BuildContext context) {
     return GestureDetector(
       onTap: () {
+        insightsController.currentPage.value = 1;
         insightsController.selectedPaymentIndex.value = index;
       },
       child: _getPaymentWidget(index, context),
@@ -165,7 +170,7 @@ class InsightsScreen extends StatelessWidget {
     if (index == insightsController.selectedPaymentIndex.value) {
       return GestureDetector(
         onTap: () {
-          insightsController.getData(index);
+          insightsController.getData();
         },
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 12),

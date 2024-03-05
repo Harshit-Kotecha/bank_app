@@ -1,7 +1,9 @@
 import 'package:bank_app/constants/app_colors.dart';
 import 'package:bank_app/features/dashboard/data/controller/transfer_money_controller.dart';
 import 'package:bank_app/features/dashboard/presentation/widgets/card_profile.dart';
+import 'package:bank_app/features/dashboard/presentation/widgets/card_widget.dart';
 import 'package:bank_app/features/dashboard/presentation/widgets/my_app_bar.dart';
+import 'package:bank_app/features/dashboard/presentation/widgets/transaction_tile.dart';
 import 'package:bank_app/routing/named_routes.dart';
 import 'package:bank_app/routing/navigation_handler.dart';
 import 'package:bank_app/utils/dimensions.dart';
@@ -19,20 +21,58 @@ class TransferScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              children: [
+                MyAppBar(text: "Transfer"),
+                Spacing.verticalSpacing(context, 32),
+                const CardProfile(),
+                Spacing.verticalSpacing(context, 60),
+                _inputAmount(context),
+              ],
+            ),
+            // Column(
+            //   // mainAxisAlignment: MainAxisAlignment.end,
+            //   children: [
+            //     AppElevatedButton(
+            //       title: "Send Money",
+            //       onPress: () {
+            //         NavigationHandler.navigateTo(NamedRoutes.receiptScreen);
+            //       },
+            //     ),
+            //     const CardWidget(),
+            //   ],
+            // ),
+          ],
+        ),
+      ),
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          MyAppBar(text: "Transfer"),
-          Spacing.verticalSpacing(context, 32),
-          const CardProfile(),
-          Spacing.verticalSpacing(context, 60),
-          _inputAmount(context),
+          AppElevatedButton(
+            title: "Send Money",
+            onPress: () {
+              NavigationHandler.navigateTo(NamedRoutes.receiptScreen);
+            },
+          ),
+          // const CardWidget(),
         ],
       ),
-      floatingActionButton: AppElevatedButton(
-          title: "Send Money",
-          onPress: () {
-            NavigationHandler.navigateTo(NamedRoutes.receiptScreen);
-          }),
+      // floatingActionButton: Column(
+      //   mainAxisAlignment: MainAxisAlignment.end,
+      //   children: [
+      //     AppElevatedButton(
+      //       title: "Send Money",
+      //       onPress: () {
+      //         NavigationHandler.navigateTo(NamedRoutes.receiptScreen);
+      //       },
+      //     ),
+      //     const TransactionTile(index: 0),
+      //   ],
+      // ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
