@@ -3,16 +3,17 @@ import 'package:bank_app/constants/assets.dart';
 import 'package:bank_app/core/custom_text.dart';
 import 'package:bank_app/core/custom_text_style.dart';
 import 'package:bank_app/features/auth/data/controller/auth_controller.dart';
+import 'package:bank_app/routing/named_routes.dart';
+import 'package:bank_app/routing/navigation_handler.dart';
 import 'package:bank_app/utils/dimensions.dart';
 import 'package:bank_app/widgets/app_elevated_button.dart';
-import 'package:bank_app/widgets/custom_text_field.dart';
 import 'package:bank_app/widgets/spacing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-class SignInScreen extends StatelessWidget {
-  SignInScreen({super.key});
+class WelcomeScreen extends StatelessWidget {
+  WelcomeScreen({super.key});
 
   final AuthController _authController = Get.put(AuthController());
 
@@ -23,26 +24,39 @@ class SignInScreen extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.symmetric(
               horizontal: scaleW(context, 25.5), vertical: scaleH(context, 8)),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Spacing.verticalSpacing(context, 30),
-                _welcomeWidget(context),
-                Spacing.verticalSpacing(context, 32),
-                CustomTextField(
-                  labelText: "Username",
-                  controller: _authController.userNameTextController,
-                ),
-                Spacing.verticalSpacing(context, 16),
-                CustomTextField(
-                  labelText: "Password",
-                  controller: _authController.passwordTextController,
-                ),
-                Spacing.verticalSpacing(context, 24),
-                AppElevatedButton(
-                    title: "Sign In", onPress: _authController.signIn),
-              ],
-            ),
+          child: Column(
+            children: [
+              Spacing.verticalSpacing(context, 30),
+              _welcomeWidget(context),
+              Spacing.verticalSpacing(context, 32),
+              _signInButtons(context),
+              Spacing.verticalSpacing(context, 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CustomText(
+                    text: "Already a member?",
+                    textStyle: CustomTextStyle.textStyle16Regular(
+                      context,
+                      color: AppColors.lightTitleText,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      NavigationHandler.navigateTo(NamedRoutes.signinScreen);
+                    },
+                    child: CustomText(
+                      text: " Sign In",
+                      textStyle: CustomTextStyle.textStyle16SemiBold(
+                        context,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ],
+              )
+            ],
           ),
         ),
       ),
@@ -62,6 +76,16 @@ class SignInScreen extends StatelessWidget {
           textStyle: CustomTextStyle.textStyle34Bold(
             context,
             color: AppColors.primaryColor,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        Spacing.verticalSpacing(context, 20),
+        CustomText(
+          text:
+              "Manage your finances anytime, anywhere with our online banking app.",
+          textStyle: CustomTextStyle.textStyle16Regular(
+            context,
+            color: AppColors.lightTitleText,
           ),
           textAlign: TextAlign.center,
         ),

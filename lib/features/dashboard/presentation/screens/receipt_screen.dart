@@ -52,8 +52,7 @@ class ReceiptScreen extends StatelessWidget {
               height: scaleH(context, 39),
               child: CustomText(
                   text: "View Receipt",
-                  textStyle: CustomTextStyle.textStyle16Bold(context,
-                      color: AppColors.black)),
+                  textStyle: CustomTextStyle.textStyle16Bold(context)),
             ),
             AppElevatedButton(
                 title: "Close",

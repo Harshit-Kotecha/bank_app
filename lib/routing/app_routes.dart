@@ -1,4 +1,5 @@
 import 'package:bank_app/features/auth/presentation/screens/sign_in_screen.dart';
+import 'package:bank_app/features/auth/presentation/screens/welcome_screen.dart';
 import 'package:bank_app/features/auth/presentation/screens/splash_screen.dart';
 import 'package:bank_app/features/dashboard/presentation/screens/dashboard_screen.dart';
 import 'package:bank_app/features/dashboard/presentation/screens/insights_screen.dart';
@@ -14,8 +15,12 @@ abstract class AppRoutes {
         page: () => SplashScreen(),
       ),
       GetPage(
+        name: NamedRoutes.welcomeScreen,
+        page: () => WelcomeScreen(),
+      ),
+      GetPage(
         name: NamedRoutes.signinScreen,
-        page: () => const SignInScreen(),
+        page: () => SignInScreen(),
       ),
       GetPage(
         name: NamedRoutes.dashboardScreen,

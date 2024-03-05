@@ -3,7 +3,6 @@ import 'package:bank_app/core/custom_text.dart';
 import 'package:bank_app/core/custom_text_style.dart';
 import 'package:bank_app/utils/dimensions.dart';
 import 'package:bank_app/widgets/spacing.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class PaymentTile extends StatelessWidget {
@@ -28,7 +27,6 @@ class PaymentTile extends StatelessWidget {
                 text: "Paytm Merchant via UPI",
                 textStyle: CustomTextStyle.textStyle13(
                   context,
-                  color: AppColors.black,
                 ),
               ),
               Spacing.verticalSpacing(context, 4),

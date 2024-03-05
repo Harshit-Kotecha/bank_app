@@ -13,10 +13,7 @@ import 'package:bank_app/routing/navigation_handler.dart';
 import 'package:bank_app/utils/dimensions.dart';
 import 'package:bank_app/widgets/app_elevated_button.dart';
 import 'package:bank_app/widgets/spacing.dart';
-import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class InsightsScreen extends StatelessWidget {
@@ -34,7 +31,7 @@ class InsightsScreen extends StatelessWidget {
                 vertical: scaleH(context, 8)),
             child: Column(
               children: [
-                const MyAppBar(text: "Expense Tracker"),
+                MyAppBar(text: "Expense Tracker"),
                 Spacing.verticalSpacing(context, 14),
                 _budgetBalance(context),
                 Spacing.verticalSpacing(context, 14),
@@ -107,7 +104,6 @@ class InsightsScreen extends StatelessWidget {
           text: "Household Budget",
           textStyle: CustomTextStyle.textStyle16Bold(
             context,
-            color: AppColors.black,
           ),
         ),
         CustomText(
@@ -167,16 +163,21 @@ class InsightsScreen extends StatelessWidget {
 
   _getPaymentWidget(int index, BuildContext context) {
     if (index == insightsController.selectedPaymentIndex.value) {
-      return Container(
-        padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 12),
-        decoration: const BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(30)),
-            color: AppColors.black),
-        child: CustomText(
-          text: insightsController.paymentOptions[index],
-          textStyle: CustomTextStyle.textStyle12Bold(
-            context,
-            color: AppColors.white,
+      return GestureDetector(
+        onTap: () {
+          insightsController.getData(index);
+        },
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 12),
+          decoration: const BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(30)),
+              color: AppColors.black),
+          child: CustomText(
+            text: insightsController.paymentOptions[index],
+            textStyle: CustomTextStyle.textStyle12Bold(
+              context,
+              color: AppColors.white,
+            ),
           ),
         ),
       );

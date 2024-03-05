@@ -21,7 +21,7 @@ class TransferScreen extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          const MyAppBar(text: "Transfer"),
+          MyAppBar(text: "Transfer"),
           Spacing.verticalSpacing(context, 32),
           const CardProfile(),
           Spacing.verticalSpacing(context, 60),
@@ -59,9 +59,7 @@ class TransferScreen extends StatelessWidget {
         enabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(color: AppColors.fC9C9C9),
         ),
-        focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.black), // Black color
-        ),
+        focusedBorder: UnderlineInputBorder(),
       ),
     );
   }

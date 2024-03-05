@@ -1,9 +1,7 @@
 import 'package:bank_app/constants/app_colors.dart';
 import 'package:bank_app/core/custom_text.dart';
 import 'package:bank_app/core/custom_text_style.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class PieChartDataWidget extends StatelessWidget {
@@ -34,7 +32,6 @@ class PieChartDataWidget extends StatelessWidget {
             text: "20%",
             textStyle: CustomTextStyle.textStyle12R(
               context,
-              color: AppColors.black,
             ),
           ),
           LinearPercentIndicator(
