@@ -422,8 +422,6 @@ abstract class AppStrings {
   static String get oneImageRequired => localized('Image is required');
   static String get pleaseProvideImage =>
       localized('please provide atleast one media (image, video)');
-  static String get googleMapKey =>
-      localized('AIzaSyC0K8LSjckzmfwyqePcqYhPcJ1vqIXhcqc');
   static String get resolutionAttachment => localized('Resolution Attachment');
   static String get largeFile => localized('Large file');
   static String get largeFileDescription =>
