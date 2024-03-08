@@ -48,12 +48,13 @@ class InsightsScreen extends StatelessWidget {
                 if (insightsController.selectedChartTab.value == 0)
                   GraphWidget()
                 else
+                  // FIXME: Pass data here
                   PieChartWidget(
                     sectors: [
-                      Sector(color: AppColors.assignedBlue, value: 40),
-                      Sector(color: AppColors.red, value: 30),
-                      Sector(color: AppColors.green, value: 10),
-                      Sector(color: AppColors.primaryColor, value: 1),
+                      Sector(color: Colors.grey.shade800, value: 50),
+                      Sector(color: Colors.grey.shade200, value: 30),
+                      Sector(color: Colors.grey.shade500, value: 11),
+                      Sector(color: Colors.grey.shade300, value: 9),
                     ],
                   ),
                 Spacing.verticalSpacing(context, 36),
@@ -158,9 +159,10 @@ class InsightsScreen extends StatelessWidget {
 
   _getPaymentsTab(int index, BuildContext context) {
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
         insightsController.currentPage.value = 1;
         insightsController.selectedPaymentIndex.value = index;
+        await insightsController.getData();
       },
       child: _getPaymentWidget(index, context),
     );

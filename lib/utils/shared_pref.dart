@@ -25,6 +25,8 @@ const String username = "username";
 const String firstName = "firstName";
 const String lastName = "lastName";
 const String userKey = "userKey";
+const String kAccountNo = "accountNo";
+const String kBalance = "balance";
 
 class SharedPref {
 // To Clear All data from SharedPreferences

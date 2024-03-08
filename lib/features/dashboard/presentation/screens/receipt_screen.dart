@@ -3,6 +3,7 @@ import 'package:bank_app/constants/assets.dart';
 import 'package:bank_app/core/custom_text.dart';
 import 'package:bank_app/core/custom_text_style.dart';
 import 'package:bank_app/features/dashboard/data/controller/dashboard_controller.dart';
+import 'package:bank_app/features/dashboard/data/controller/home_controller.dart';
 import 'package:bank_app/features/dashboard/data/controller/transfer_money_controller.dart';
 import 'package:bank_app/routing/named_routes.dart';
 import 'package:bank_app/routing/navigation_handler.dart';
@@ -17,6 +18,7 @@ class ReceiptScreen extends StatelessWidget {
   ReceiptScreen({super.key});
   final TransferMoneyController transferMoneyController = Get.find();
   final DashboardController dashboardController = Get.find();
+  final HomeController homeController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,8 +58,10 @@ class ReceiptScreen extends StatelessWidget {
             ),
             AppElevatedButton(
                 title: "Close",
-                onPress: () {
+                onPress: () async {
                   dashboardController.selectedTabIndex.value = 0;
+                  await homeController.fetchRecentTransactions();
+                  await homeController.updateInfo();
                   NavigationHandler.removeAllNavigateTo(
                       NamedRoutes.dashboardScreen);
                 }),

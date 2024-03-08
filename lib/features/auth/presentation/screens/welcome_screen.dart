@@ -3,6 +3,7 @@ import 'package:bank_app/constants/assets.dart';
 import 'package:bank_app/core/custom_text.dart';
 import 'package:bank_app/core/custom_text_style.dart';
 import 'package:bank_app/features/auth/data/controller/auth_controller.dart';
+import 'package:bank_app/features/dashboard/presentation/widgets/progress_widget.dart';
 import 'package:bank_app/routing/named_routes.dart';
 import 'package:bank_app/routing/navigation_handler.dart';
 import 'package:bank_app/utils/dimensions.dart';
@@ -21,43 +22,51 @@ class WelcomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: scaleW(context, 25.5), vertical: scaleH(context, 8)),
-          child: Column(
-            children: [
-              Spacing.verticalSpacing(context, 30),
-              _welcomeWidget(context),
-              Spacing.verticalSpacing(context, 32),
-              _signInButtons(context),
-              Spacing.verticalSpacing(context, 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CustomText(
-                    text: "Already a member?",
-                    textStyle: CustomTextStyle.textStyle16Regular(
-                      context,
-                      color: AppColors.lightTitleText,
-                    ),
-                    textAlign: TextAlign.center,
+        child: Obx(
+          () => _authController.isLoading.value
+              ? const Center(
+                  child: ProgressWidget(),
+                )
+              : Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: scaleW(context, 25.5),
+                      vertical: scaleH(context, 8)),
+                  child: Column(
+                    children: [
+                      Spacing.verticalSpacing(context, 30),
+                      _welcomeWidget(context),
+                      Spacing.verticalSpacing(context, 32),
+                      _signInButtons(context),
+                      Spacing.verticalSpacing(context, 20),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CustomText(
+                            text: "Already a member?",
+                            textStyle: CustomTextStyle.textStyle16Regular(
+                              context,
+                              color: AppColors.lightTitleText,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              NavigationHandler.navigateTo(
+                                  NamedRoutes.signinScreen);
+                            },
+                            child: CustomText(
+                              text: " Sign In",
+                              textStyle: CustomTextStyle.textStyle16SemiBold(
+                                context,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      NavigationHandler.navigateTo(NamedRoutes.signinScreen);
-                    },
-                    child: CustomText(
-                      text: " Sign In",
-                      textStyle: CustomTextStyle.textStyle16SemiBold(
-                        context,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ],
-              )
-            ],
-          ),
+                ),
         ),
       ),
     );

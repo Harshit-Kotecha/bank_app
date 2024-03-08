@@ -2,6 +2,7 @@ import 'package:bank_app/constants/app_strings.dart';
 import 'package:bank_app/features/auth/data/services/auth_service.dart';
 import 'package:bank_app/routing/named_routes.dart';
 import 'package:bank_app/routing/navigation_handler.dart';
+import 'package:bank_app/utils/custom_print.dart';
 import 'package:bank_app/utils/shared_pref.dart';
 import 'package:bank_app/utils/snackbar.dart';
 import 'package:dio/dio.dart' as dio;
@@ -63,10 +64,16 @@ mixin NetworkHandlingMixin {
     dio.DioException error,
     dio.ErrorInterceptorHandler handler,
   ) async {
-    final result = await AuthService.hasTokenRefreshed();
-    if (result) {
-      NavigationHandler.removeAllNavigateTo('/');
-    } else {
+    try {
+      final result = await AuthService.hasTokenRefreshed();
+      if (result) {
+        NavigationHandler.removeAllNavigateTo('/');
+      } else {
+        await SharedPref.clearAllData();
+        NavigationHandler.removeAllNavigateTo(NamedRoutes.signinScreen);
+      }
+    } catch (e) {
+      printErr(e);
       await SharedPref.clearAllData();
       NavigationHandler.removeAllNavigateTo(NamedRoutes.signinScreen);
     }

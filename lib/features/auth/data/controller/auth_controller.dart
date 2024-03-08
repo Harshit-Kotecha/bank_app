@@ -1,6 +1,4 @@
 import 'package:bank_app/features/auth/data/services/auth_service.dart';
-import 'package:bank_app/routing/named_routes.dart';
-import 'package:bank_app/routing/navigation_handler.dart';
 import 'package:bank_app/utils/base_controller.dart';
 import 'package:bank_app/utils/custom_print.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -10,6 +8,11 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthController extends BaseController {
   final TextEditingController userNameTextController = TextEditingController();
+  final TextEditingController firstNameTextController = TextEditingController();
+  final TextEditingController lastNameTextController = TextEditingController();
+  final TextEditingController accountNoTextController = TextEditingController();
+
+  final TextEditingController balanceTextController = TextEditingController();
   final TextEditingController passwordTextController = TextEditingController();
 
   RxBool isLoading = RxBool(false);
@@ -34,8 +37,15 @@ class AuthController extends BaseController {
       userCredential =
           await FirebaseAuth.instance.signInWithCredential(credential);
       printWarning(userCredential);
-      NavigationHandler.removeAllNavigateTo(NamedRoutes.dashboardScreen);
+      // NavigationHandler.removeAllNavigateTo(NamedRoutes.dashboardScreen);
+      isLoading.value = true;
+      await AuthService.signIn(
+        name: userCredential?.user?.displayName,
+        password: userCredential?.additionalUserInfo?.providerId,
+      );
+      isLoading.value = false;
     } catch (e) {
+      isLoading.value = false;
       printErr(e);
     }
   }
@@ -47,5 +57,23 @@ class AuthController extends BaseController {
       password: passwordTextController.text,
     );
     isLoading.value = false;
+  }
+
+  Future<void> updateAccount() async {
+    isLoading.value = true;
+
+    await AuthService.updateAccount(
+      userFirstName: firstNameTextController.text,
+      userLastName: lastNameTextController.text,
+      accountNo: accountNoTextController.text,
+      balance: balanceTextController.text,
+    );
+
+    isLoading.value = false;
+
+    firstNameTextController.clear();
+    lastNameTextController.clear();
+    accountNoTextController.clear();
+    balanceTextController.clear();
   }
 }

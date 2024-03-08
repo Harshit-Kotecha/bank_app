@@ -49,7 +49,7 @@ class TransactionTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CustomText(
-                    text: "Spotify",
+                    text: "Ramesh Jain",
                     textStyle: CustomTextStyle.textStyle14Bold(
                       context,
                       color: AppColors.primaryColor,

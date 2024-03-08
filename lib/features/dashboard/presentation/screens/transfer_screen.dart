@@ -1,11 +1,9 @@
 import 'package:bank_app/constants/app_colors.dart';
+import 'package:bank_app/features/dashboard/data/controller/dashboard_controller.dart';
 import 'package:bank_app/features/dashboard/data/controller/transfer_money_controller.dart';
 import 'package:bank_app/features/dashboard/presentation/widgets/card_profile.dart';
-import 'package:bank_app/features/dashboard/presentation/widgets/card_widget.dart';
 import 'package:bank_app/features/dashboard/presentation/widgets/my_app_bar.dart';
-import 'package:bank_app/features/dashboard/presentation/widgets/transaction_tile.dart';
-import 'package:bank_app/routing/named_routes.dart';
-import 'package:bank_app/routing/navigation_handler.dart';
+import 'package:bank_app/features/dashboard/presentation/widgets/progress_widget.dart';
 import 'package:bank_app/utils/dimensions.dart';
 import 'package:bank_app/widgets/app_elevated_button.dart';
 import 'package:bank_app/widgets/spacing.dart';
@@ -22,31 +20,37 @@ class TransferScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              children: [
-                MyAppBar(text: "Transfer"),
-                Spacing.verticalSpacing(context, 32),
-                const CardProfile(),
-                Spacing.verticalSpacing(context, 60),
-                _inputAmount(context),
-              ],
-            ),
-            // Column(
-            //   // mainAxisAlignment: MainAxisAlignment.end,
-            //   children: [
-            //     AppElevatedButton(
-            //       title: "Send Money",
-            //       onPress: () {
-            //         NavigationHandler.navigateTo(NamedRoutes.receiptScreen);
-            //       },
-            //     ),
-            //     const CardWidget(),
-            //   ],
-            // ),
-          ],
+        child: Obx(
+          () => transferMoneyController.isLoading.value
+              ? const Center(
+                  child: ProgressWidget(),
+                )
+              : Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      children: [
+                        MyAppBar(text: "Transfer"),
+                        Spacing.verticalSpacing(context, 32),
+                        const CardProfile(),
+                        Spacing.verticalSpacing(context, 60),
+                        _inputAmount(context),
+                      ],
+                    ),
+                    // Column(
+                    //   // mainAxisAlignment: MainAxisAlignment.end,
+                    //   children: [
+                    //     AppElevatedButton(
+                    //       title: "Send Money",
+                    //       onPress: () {
+                    //         NavigationHandler.navigateTo(NamedRoutes.receiptScreen);
+                    //       },
+                    //     ),
+                    //     const CardWidget(),
+                    //   ],
+                    // ),
+                  ],
+                ),
         ),
       ),
       floatingActionButton: Column(
@@ -55,7 +59,8 @@ class TransferScreen extends StatelessWidget {
           AppElevatedButton(
             title: "Send Money",
             onPress: () {
-              NavigationHandler.navigateTo(NamedRoutes.receiptScreen);
+              FocusManager.instance.primaryFocus?.unfocus();
+              transferMoneyController.sendMoney();
             },
           ),
           // const CardWidget(),

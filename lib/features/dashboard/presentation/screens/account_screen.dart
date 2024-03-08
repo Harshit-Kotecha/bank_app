@@ -4,7 +4,6 @@ import 'package:bank_app/utils/dimensions.dart';
 import 'package:bank_app/widgets/custom_text_field.dart';
 import 'package:bank_app/widgets/spacing.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class AccountScreen extends StatelessWidget {

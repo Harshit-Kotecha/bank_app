@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 import 'package:bank_app/constants/app_colors.dart';
 import 'package:bank_app/constants/assets.dart';
@@ -39,7 +38,7 @@ class SignInScreen extends StatelessWidget {
                         _welcomeWidget(context),
                         Spacing.verticalSpacing(context, 32),
                         CustomTextField(
-                          labelText: "Enter you username",
+                          labelText: "Enter your username",
                           controller: _authController.userNameTextController,
                         ),
                         Spacing.verticalSpacing(context, 16),
