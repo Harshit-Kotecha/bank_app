@@ -1,6 +1,7 @@
 import 'package:bank_app/features/dashboard/data/models/transaction_model.dart';
 import 'package:bank_app/routing/named_routes.dart';
 import 'package:bank_app/routing/navigation_handler.dart';
+import 'package:bank_app/services/local_notification_service.dart';
 import 'package:bank_app/services/network/dio_client.dart';
 import 'package:bank_app/utils/custom_print.dart';
 import 'package:flutter/material.dart';
@@ -44,6 +45,10 @@ abstract class DashboardService {
         throw Exception("Couldn't make the payment");
       }
       FocusManager.instance.primaryFocus?.unfocus();
+
+      // FIXME: Show alert on basis of json
+      // await LocalNotificationService().showNotificationAndroid(
+      //     "Alert", "You have exceeded the amount limit");
 
       NavigationHandler.navigateTo(NamedRoutes.receiptScreen);
     } catch (e) {

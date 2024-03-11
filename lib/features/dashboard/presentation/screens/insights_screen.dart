@@ -70,17 +70,27 @@ class InsightsScreen extends StatelessWidget {
                 ),
                 Spacing.verticalSpacing(context, 8),
                 Expanded(
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: insightsController.transactions.length,
-                    controller: insightsController.scrollController,
-                    itemBuilder: (context, index) {
-                      return PaymentTile(
-                        transactionModel:
-                            insightsController.transactions[index],
-                      );
-                    },
-                  ),
+                  child: insightsController.transactions.isEmpty
+                      ? const Center(
+                          child: CustomText(
+                            text: "No transaction found",
+                            textStyle: TextStyle(
+                                fontSize: 13,
+                                color: AppColors.black,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        )
+                      : ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: insightsController.transactions.length,
+                          controller: insightsController.scrollController,
+                          itemBuilder: (context, index) {
+                            return PaymentTile(
+                              transactionModel:
+                                  insightsController.transactions[index],
+                            );
+                          },
+                        ),
                 ),
               ],
             ),
@@ -162,6 +172,7 @@ class InsightsScreen extends StatelessWidget {
       onTap: () async {
         insightsController.currentPage.value = 1;
         insightsController.selectedPaymentIndex.value = index;
+        insightsController.transactions.clear();
         await insightsController.getData();
       },
       child: _getPaymentWidget(index, context),
@@ -172,6 +183,7 @@ class InsightsScreen extends StatelessWidget {
     if (index == insightsController.selectedPaymentIndex.value) {
       return GestureDetector(
         onTap: () {
+          insightsController.transactions.clear();
           insightsController.getData();
         },
         child: Container(

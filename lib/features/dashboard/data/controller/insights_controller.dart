@@ -33,7 +33,7 @@ class InsightsController extends BaseController {
       } else if (selectedPaymentIndex.value == 1) {
         type = "upi";
       } else {
-        type = "credit_card";
+        type = "bank";
       }
       final result = await DashboardService.getTransactionData(
         rowCount: 10,

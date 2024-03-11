@@ -22,12 +22,9 @@ class GraphWidget extends StatelessWidget {
           titlesData: FlTitlesData(
             // show: false,
             bottomTitles: AxisTitles(sideTitles: _bottomTitles),
-            leftTitles:
-                const AxisTitles(),
-            topTitles:
-                const AxisTitles(),
-            rightTitles:
-                const AxisTitles(),
+            leftTitles: const AxisTitles(),
+            topTitles: const AxisTitles(),
+            rightTitles: const AxisTitles(),
           ),
         ),
       ),
@@ -73,7 +70,6 @@ class GraphWidget extends StatelessWidget {
   SideTitles get _bottomTitles => SideTitles(
         showTitles: true,
         getTitlesWidget: (value, meta) {
-          String text = '';
           return Text(
             "${value.toInt()} Feb",
             style: const TextStyle(
@@ -82,28 +78,6 @@ class GraphWidget extends StatelessWidget {
               color: AppColors.f494949,
             ),
           );
-          switch (value.toInt()) {
-            case 0:
-              text = 'Jan';
-              break;
-            case 2:
-              text = 'Mar';
-              break;
-            case 4:
-              text = 'May';
-              break;
-            case 6:
-              text = 'Jul';
-              break;
-            case 8:
-              text = 'Sep';
-              break;
-            case 10:
-              text = 'Nov';
-              break;
-          }
-
-          return Text(text);
         },
       );
 }

@@ -1,5 +1,4 @@
 import 'package:bank_app/constants/app_colors.dart';
-import 'package:bank_app/features/dashboard/data/controller/dashboard_controller.dart';
 import 'package:bank_app/features/dashboard/data/controller/transfer_money_controller.dart';
 import 'package:bank_app/features/dashboard/presentation/widgets/card_profile.dart';
 import 'package:bank_app/features/dashboard/presentation/widgets/my_app_bar.dart';
@@ -37,18 +36,6 @@ class TransferScreen extends StatelessWidget {
                         _inputAmount(context),
                       ],
                     ),
-                    // Column(
-                    //   // mainAxisAlignment: MainAxisAlignment.end,
-                    //   children: [
-                    //     AppElevatedButton(
-                    //       title: "Send Money",
-                    //       onPress: () {
-                    //         NavigationHandler.navigateTo(NamedRoutes.receiptScreen);
-                    //       },
-                    //     ),
-                    //     const CardWidget(),
-                    //   ],
-                    // ),
                   ],
                 ),
         ),
@@ -66,18 +53,6 @@ class TransferScreen extends StatelessWidget {
           // const CardWidget(),
         ],
       ),
-      // floatingActionButton: Column(
-      //   mainAxisAlignment: MainAxisAlignment.end,
-      //   children: [
-      //     AppElevatedButton(
-      //       title: "Send Money",
-      //       onPress: () {
-      //         NavigationHandler.navigateTo(NamedRoutes.receiptScreen);
-      //       },
-      //     ),
-      //     const TransactionTile(index: 0),
-      //   ],
-      // ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }

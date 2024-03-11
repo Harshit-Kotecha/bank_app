@@ -6,12 +6,12 @@ import 'package:bank_app/utils/base_controller.dart';
 import 'package:get/get.dart';
 
 class DashboardController extends BaseController {
-  RxInt selectedTabIndex = RxInt(0);
+  RxInt selectedTabIndex = RxInt(3);
 
   final widgetOptions = [
     HomeScreen(),
     TransferScreen(),
-    const CardsScreen(),
+    CardsScreen(),
     UpdateAccount(),
   ];
 }

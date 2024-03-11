@@ -1,4 +1,3 @@
-
 import 'package:bank_app/constants/app_colors.dart';
 import 'package:bank_app/constants/assets.dart';
 import 'package:bank_app/core/custom_text.dart';
@@ -10,7 +9,6 @@ import 'package:bank_app/widgets/app_elevated_button.dart';
 import 'package:bank_app/widgets/custom_text_field.dart';
 import 'package:bank_app/widgets/spacing.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class SignInScreen extends StatelessWidget {
@@ -74,39 +72,6 @@ class SignInScreen extends StatelessWidget {
             color: AppColors.primaryColor,
           ),
           textAlign: TextAlign.center,
-        ),
-      ],
-    );
-  }
-
-  _signInButtons(BuildContext context) {
-    return Column(
-      children: [
-        AppElevatedButton(title: "Create an Account", onPress: () {}),
-        Spacing.verticalSpacing(context, 16),
-        GestureDetector(
-          onTap: () => _authController.signInWithGoogle(),
-          child: Container(
-            width: double.maxFinite,
-            height: scaleH(context, 39),
-            decoration: BoxDecoration(
-              border: Border.all(color: AppColors.fCFCFCF),
-              borderRadius: BorderRadius.circular(scaleW(context, 10)),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SvgPicture.asset(Assets.googleSvg),
-                Spacing.horizontalSpacing(context, 16),
-                CustomText(
-                  text: "Sign In With Google",
-                  textStyle: CustomTextStyle.textStyle16Bold(
-                    context,
-                  ),
-                ),
-              ],
-            ),
-          ),
         ),
       ],
     );

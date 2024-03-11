@@ -17,9 +17,6 @@ class CardWidget extends StatelessWidget {
         borderRadius: BorderRadius.all(
           Radius.circular(10),
         ),
-        // border: Border.all(
-        //   color: AppColors.fCFCFCF,
-        // ),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

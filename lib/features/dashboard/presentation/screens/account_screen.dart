@@ -40,18 +40,6 @@ class AccountScreen extends StatelessWidget {
                   Spacing.verticalSpacing(context, 24),
                 ],
               ),
-              // Column(
-              //   // mainAxisAlignment: MainAxisAlignment.end,
-              //   children: [
-              //     AppElevatedButton(
-              //       title: "Send Money",
-              //       onPress: () {
-              //         NavigationHandler.navigateTo(NamedRoutes.receiptScreen);
-              //       },
-              //     ),
-              //     const CardWidget(),
-              //   ],
-              // ),
             ],
           ),
         ),

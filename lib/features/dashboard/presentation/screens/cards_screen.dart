@@ -2,55 +2,43 @@ import 'package:bank_app/constants/app_colors.dart';
 import 'package:bank_app/constants/assets.dart';
 import 'package:bank_app/core/custom_text.dart';
 import 'package:bank_app/core/custom_text_style.dart';
-import 'package:bank_app/features/dashboard/presentation/widgets/icon_container.dart';
+import 'package:bank_app/features/dashboard/data/controller/home_controller.dart';
 import 'package:bank_app/features/dashboard/presentation/widgets/my_app_bar.dart';
-import 'package:bank_app/routing/named_routes.dart';
-import 'package:bank_app/routing/navigation_handler.dart';
 import 'package:bank_app/utils/dimensions.dart';
 import 'package:bank_app/widgets/spacing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 class CardsScreen extends StatelessWidget {
-  const CardsScreen({super.key});
+  CardsScreen({super.key});
+
+  final HomeController homeController = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            MyAppBar(text: "Card"),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // _welcomeHeader(context),
-                  Spacing.verticalSpacing(context, 20),
-                  _cardDetails(context),
-                  Spacing.verticalSpacing(context, 20),
-                ],
+        child: Obx(
+          () => Column(
+            children: [
+              MyAppBar(text: "Card"),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // _welcomeHeader(context),
+                    Spacing.verticalSpacing(context, 20),
+                    _cardDetails(context),
+                    Spacing.verticalSpacing(context, 20),
+                  ],
+                ),
               ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  _welcomeHeader(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        CustomText(
-          text: "Sarah Tucker",
-          textStyle: CustomTextStyle.textStyle20Bold(
-            context,
-            color: AppColors.primaryColor,
+            ],
           ),
         ),
-      ],
+      ),
     );
   }
 
@@ -87,7 +75,7 @@ class CardsScreen extends StatelessWidget {
                     ),
                   ),
                   CustomText(
-                    text: "£25,890.00",
+                    text: "£${homeController.balance.value}",
                     textStyle: CustomTextStyle.textStyle34Bold(
                       context,
                       color: AppColors.white,
@@ -106,7 +94,7 @@ class CardsScreen extends StatelessWidget {
             children: [
               SvgPicture.asset(Assets.visaSvg),
               CustomText(
-                text: "2342 2212 **** ****",
+                text: homeController.accountNo.value,
                 textStyle: CustomTextStyle.textStyle14R(
                   context,
                   color: AppColors.white,
@@ -116,60 +104,6 @@ class CardsScreen extends StatelessWidget {
           )
         ],
       ),
-    );
-  }
-
-  _cardOptions(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        IconContainer(
-          assets: Assets.sendSvg,
-          text: "Send",
-          onTap: () {},
-        ),
-        IconContainer(
-          assets: Assets.recieveSvg,
-          text: "Recieve",
-          onTap: () {},
-        ),
-        IconContainer(
-          assets: Assets.lockSvg,
-          text: "LockCard",
-          onTap: () {},
-        ),
-        IconContainer(
-          assets: Assets.settingsSvg,
-          text: "Settings",
-          onTap: () {},
-        ),
-      ],
-    );
-  }
-
-  _seeTransactions(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        CustomText(
-          text: "Recent Transactions",
-          textStyle: CustomTextStyle.textStyle18Bold(
-            context,
-            color: AppColors.primaryColor,
-          ),
-        ),
-        GestureDetector(
-          onTap: () {
-            NavigationHandler.navigateTo(NamedRoutes.insightsScreen);
-          },
-          child: CustomText(
-            text: "See All",
-            textStyle: CustomTextStyle.textStyle12R(
-              context,
-            ),
-          ),
-        ),
-      ],
     );
   }
 }

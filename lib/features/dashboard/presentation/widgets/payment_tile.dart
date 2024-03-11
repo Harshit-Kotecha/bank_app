@@ -27,7 +27,7 @@ class PaymentTile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CustomText(
-                text: "Paytm Merchant via UPI",
+                text: "Online Payments",
                 textStyle: CustomTextStyle.textStyle13(
                   context,
                 ),

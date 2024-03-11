@@ -24,7 +24,11 @@ class MyAppBar extends StatelessWidget {
             onTap: () {
               dashboardController.selectedTabIndex.value = 0;
             },
-            child: SvgPicture.asset(Assets.backSvg)),
+            child: GestureDetector(
+                onTap: () {
+                  Get.back();
+                },
+                child: SvgPicture.asset(Assets.backSvg))),
         CustomText(
           text: text,
           textStyle: CustomTextStyle.textStyle16Bold(
