@@ -14,6 +14,8 @@ class CardProfile extends StatelessWidget {
       children: [
         const Image(
           image: AssetImage(Assets.profileImg),
+          width: 100,
+          height: 100,
           fit: BoxFit.fill,
         ),
         Spacing.verticalSpacing(context, 15),
