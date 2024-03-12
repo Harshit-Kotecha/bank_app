@@ -3,7 +3,7 @@ abstract class Assets {
   static const String _baseSvgPath = 'assets/svgs';
 
   static const String splashScreen = '$_baseImagePath/bank_splash.png';
-  static const String profileImg = '$_baseImagePath/profile.png';
+  static const String profileImg = '$_baseImagePath/bank_profile.png';
   static const String signInImg = '$_baseImagePath/sign_in.png';
 
   static const String sendSvg = '$_baseSvgPath/send.svg';
