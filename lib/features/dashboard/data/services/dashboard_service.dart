@@ -1,3 +1,4 @@
+import 'package:bank_app/features/dashboard/data/models/graph_model.dart';
 import 'package:bank_app/features/dashboard/data/models/transaction_model.dart';
 import 'package:bank_app/routing/named_routes.dart';
 import 'package:bank_app/routing/navigation_handler.dart';
@@ -46,13 +47,30 @@ abstract class DashboardService {
       }
       FocusManager.instance.primaryFocus?.unfocus();
 
-      // FIXME: Show alert on basis of json
-      // await LocalNotificationService().showNotificationAndroid(
-      //     "Alert", "You have exceeded the amount limit");
+      if (json.data["data"]["alert"]) {
+        await LocalNotificationService().showNotificationAndroid(
+            "Alert!", "You have exceeded the amount limit");
+      }
 
       NavigationHandler.navigateTo(NamedRoutes.receiptScreen);
     } catch (e) {
       printErr(e);
+    }
+  }
+
+  static Future<Graph?> getGraphData() async {
+    try {
+      final json = await DioClient.dioWithAuth?.get("/bank/transaction/graph");
+
+      if (json == null || (json.statusCode != 200 && json.statusCode != 201)) {
+        return null;
+      }
+
+      final data = Graph.fromJson(json.data["data"]);
+
+      return data;
+    } catch (e) {
+      return null;
     }
   }
 }

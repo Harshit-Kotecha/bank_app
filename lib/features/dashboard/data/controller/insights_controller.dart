@@ -1,3 +1,4 @@
+import 'package:bank_app/features/dashboard/data/models/graph_model.dart';
 import 'package:bank_app/features/dashboard/data/models/transaction_model.dart';
 import 'package:bank_app/features/dashboard/data/services/dashboard_service.dart';
 import 'package:bank_app/utils/base_controller.dart';
@@ -17,10 +18,14 @@ class InsightsController extends BaseController {
 
   RxList<TransactionModel> transactions = RxList([]);
 
+  Rx<Graph?> graph = Rx<Graph?>(null);
+
   @override
   Future<void> onInit() async {
     await getData();
     scrollController = ScrollController()..addListener(scrollListener);
+
+    graph.value = await DashboardService.getGraphData();
 
     super.onInit();
   }

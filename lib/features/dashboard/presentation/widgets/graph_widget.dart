@@ -1,50 +1,58 @@
 import 'package:bank_app/constants/app_colors.dart';
-import 'package:bank_app/features/dashboard/data/models/points.dart';
+import 'package:bank_app/features/dashboard/data/controller/insights_controller.dart';
+import 'package:bank_app/features/dashboard/data/models/bar.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 
 class GraphWidget extends StatelessWidget {
-  GraphWidget({super.key});
+  GraphWidget({super.key, required this.bars});
+
+  final List<Bar> bars;
+  final InsightsController insightsController = Get.find();
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 200,
-      child: BarChart(
-        BarChartData(
-          barGroups: _chartGroups(),
-          borderData: FlBorderData(
-            border: const Border(
-              bottom: BorderSide(color: AppColors.fF2F2F2),
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      reverse: true,
+      child: SizedBox(
+        height: 200,
+        width: bars.length * 60,
+        child: BarChart(
+          BarChartData(
+            barGroups: _chartGroups(),
+            borderData: FlBorderData(
+              border: const Border(
+                bottom: BorderSide(color: AppColors.fF2F2F2),
+              ),
             ),
-          ),
-          gridData: const FlGridData(show: false),
-          titlesData: FlTitlesData(
-            // show: false,
-            bottomTitles: AxisTitles(sideTitles: _bottomTitles),
-            leftTitles: const AxisTitles(),
-            topTitles: const AxisTitles(),
-            rightTitles: const AxisTitles(),
+            gridData: const FlGridData(show: false),
+            barTouchData: BarTouchData(
+              enabled: false,
+            ),
+            titlesData: FlTitlesData(
+              // show: false,
+              bottomTitles: AxisTitles(sideTitles: _bottomTitles),
+              leftTitles: const AxisTitles(),
+              topTitles: const AxisTitles(),
+              rightTitles: const AxisTitles(),
+            ),
           ),
         ),
       ),
     );
   }
 
-  final points = [
-    Points(x: 2, y: 4),
-    Points(x: 3, y: 5),
-    Points(x: 4, y: 6),
-  ];
   List<BarChartGroupData> _chartGroups() {
-    return points
+    return bars
         .map(
-          (point) => BarChartGroupData(
-            x: point.x.toInt(),
+          (bar) => BarChartGroupData(
+            x: bar.date?.day ?? 1,
             barsSpace: 8,
             barRods: [
               BarChartRodData(
-                toY: point.y,
+                toY: bar.credit ?? 0,
                 color: AppColors.f8E8E8E,
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(7),
@@ -53,7 +61,7 @@ class GraphWidget extends StatelessWidget {
                 width: 10,
               ),
               BarChartRodData(
-                toY: point.y + 2,
+                toY: bar.debit ?? 0,
                 color: AppColors.f494949,
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(7),
@@ -71,7 +79,7 @@ class GraphWidget extends StatelessWidget {
         showTitles: true,
         getTitlesWidget: (value, meta) {
           return Text(
-            "${value.toInt()} Feb",
+            "${value.toInt()} ${insightsController.graph.value?.month?.substring(0, 3)}",
             style: const TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w400,

@@ -7,6 +7,7 @@ import 'package:bank_app/features/dashboard/data/models/sector.dart';
 import 'package:bank_app/features/dashboard/presentation/widgets/graph_widget.dart';
 import 'package:bank_app/features/dashboard/presentation/widgets/my_app_bar.dart';
 import 'package:bank_app/features/dashboard/presentation/widgets/payment_tile.dart';
+import 'package:bank_app/features/dashboard/presentation/widgets/pie_chart_data_widget.dart';
 import 'package:bank_app/features/dashboard/presentation/widgets/pie_chart_widget.dart';
 import 'package:bank_app/routing/named_routes.dart';
 import 'package:bank_app/routing/navigation_handler.dart';
@@ -29,60 +30,95 @@ class InsightsScreen extends StatelessWidget {
             padding: EdgeInsets.symmetric(
                 horizontal: scaleW(context, 25.5),
                 vertical: scaleH(context, 8)),
-            child: Column(
-              children: [
-                MyAppBar(text: "Expense Tracker"),
-                Spacing.verticalSpacing(context, 14),
-                _budgetBalance(context),
-                Spacing.verticalSpacing(context, 14),
-                Row(
-                  children: [
-                    ...insightsController.chartTab
-                        .asMap()
-                        .map((index, value) =>
-                            MapEntry(index, _getChartTab(index, context)))
-                        .values
-                        .toList(),
-                  ],
-                ),
-                if (insightsController.selectedChartTab.value == 0)
-                  GraphWidget()
-                else
-                  // FIXME: Pass data here
-                  PieChartWidget(
-                    sectors: [
-                      Sector(color: Colors.grey.shade800, value: 50),
-                      Sector(color: Colors.grey.shade200, value: 30),
-                      Sector(color: Colors.grey.shade500, value: 11),
-                      Sector(color: Colors.grey.shade300, value: 9),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  MyAppBar(text: "Expense Tracker"),
+                  Spacing.verticalSpacing(context, 14),
+                  _budgetBalance(context),
+                  Spacing.verticalSpacing(context, 14),
+                  Row(
+                    children: [
+                      ...insightsController.chartTab
+                          .asMap()
+                          .map((index, value) =>
+                              MapEntry(index, _getChartTab(index, context)))
+                          .values
+                          .toList(),
                     ],
                   ),
-                Spacing.verticalSpacing(context, 36),
-                Row(
-                  children: [
-                    ...insightsController.paymentOptions
-                        .asMap()
-                        .map((index, value) =>
-                            MapEntry(index, _getPaymentsTab(index, context)))
-                        .values
-                        .toList(),
-                  ],
-                ),
-                Spacing.verticalSpacing(context, 8),
-                Expanded(
-                  child: insightsController.transactions.isEmpty
-                      ? const Center(
-                          child: CustomText(
-                            text: "No transaction found",
-                            textStyle: TextStyle(
-                                fontSize: 13,
-                                color: AppColors.black,
-                                fontWeight: FontWeight.w600),
+                  if (insightsController.selectedChartTab.value == 0)
+                    GraphWidget(
+                      bars: insightsController.graph.value?.bars ?? [],
+                    )
+                  else
+                    Column(
+                      children: [
+                        PieChartWidget(
+                          month:
+                              insightsController.graph.value?.month ?? "March",
+                          ratio: insightsController.graph.value?.ratio ?? 0,
+                          sectors: [
+                            Sector(
+                              color: Colors.grey.shade800,
+                              value: insightsController.graph.value?.pieDebit ??
+                                  50,
+                            ),
+                            Sector(
+                              color: Colors.grey.shade400,
+                              value:
+                                  insightsController.graph.value?.pieCredit ??
+                                      50,
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            PieChartDataWidget(
+                              title: "Credit",
+                              percent:
+                                  insightsController.graph.value?.pieCredit ??
+                                      0,
+                            ),
+                            PieChartDataWidget(
+                              title: "Debit",
+                              percent:
+                                  insightsController.graph.value?.pieDebit ?? 0,
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  Spacing.verticalSpacing(context, 36),
+                  Row(
+                    children: [
+                      ...insightsController.paymentOptions
+                          .asMap()
+                          .map((index, value) =>
+                              MapEntry(index, _getPaymentsTab(index, context)))
+                          .values
+                          .toList(),
+                    ],
+                  ),
+                  Spacing.verticalSpacing(context, 8),
+                  insightsController.transactions.isEmpty
+                      ? const SizedBox(
+                          height: 80,
+                          child: Center(
+                            child: CustomText(
+                              text: "No transaction found",
+                              textStyle: TextStyle(
+                                  fontSize: 13,
+                                  color: AppColors.black,
+                                  fontWeight: FontWeight.w600),
+                            ),
                           ),
                         )
                       : ListView.builder(
                           shrinkWrap: true,
                           itemCount: insightsController.transactions.length,
+                          physics: const NeverScrollableScrollPhysics(),
                           controller: insightsController.scrollController,
                           itemBuilder: (context, index) {
                             return PaymentTile(
@@ -91,8 +127,8 @@ class InsightsScreen extends StatelessWidget {
                             );
                           },
                         ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
@@ -134,7 +170,7 @@ class InsightsScreen extends StatelessWidget {
 
   _getChartTab(int index, BuildContext context) {
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
         insightsController.selectedChartTab.value = index;
       },
       child: _getChartWidget(index, context),

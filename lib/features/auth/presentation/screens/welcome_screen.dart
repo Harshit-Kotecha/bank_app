@@ -6,7 +6,6 @@ import 'package:bank_app/features/auth/data/controller/auth_controller.dart';
 import 'package:bank_app/features/dashboard/presentation/widgets/progress_widget.dart';
 import 'package:bank_app/routing/named_routes.dart';
 import 'package:bank_app/routing/navigation_handler.dart';
-import 'package:bank_app/services/local_notification_service.dart';
 import 'package:bank_app/utils/dimensions.dart';
 import 'package:bank_app/widgets/app_elevated_button.dart';
 import 'package:bank_app/widgets/spacing.dart';
