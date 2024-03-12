@@ -3,7 +3,6 @@ import 'package:bank_app/constants/assets.dart';
 import 'package:bank_app/core/custom_text.dart';
 import 'package:bank_app/core/custom_text_style.dart';
 import 'package:bank_app/widgets/spacing.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 class CardProfile extends StatelessWidget {

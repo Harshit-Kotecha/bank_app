@@ -2,18 +2,20 @@ import 'package:bank_app/constants/app_colors.dart';
 import 'package:bank_app/constants/assets.dart';
 import 'package:bank_app/core/custom_text.dart';
 import 'package:bank_app/core/custom_text_style.dart';
+import 'package:bank_app/features/dashboard/data/models/transaction_model.dart';
 import 'package:bank_app/utils/dimensions.dart';
 import 'package:bank_app/widgets/spacing.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class TransactionTile extends StatelessWidget {
-  const TransactionTile({super.key, required this.index});
+  const TransactionTile({
+    super.key,
+    required this.transactionModel,
+  });
 
-  final int index;
-
+  final TransactionModel transactionModel;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -47,7 +49,7 @@ class TransactionTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CustomText(
-                    text: "Spotify",
+                    text: "John Cena",
                     textStyle: CustomTextStyle.textStyle14Bold(
                       context,
                       color: AppColors.primaryColor,
@@ -65,10 +67,12 @@ class TransactionTile extends StatelessWidget {
             ],
           ),
           CustomText(
-            text: "${index % 2 == 0 ? '+' : '-'}£199",
+            text:
+                "${transactionModel.isCredit ? '+' : '-'}£${transactionModel.amount}",
             textStyle: CustomTextStyle.textStyle14Bold(
               context,
-              color: index % 2 == 0 ? AppColors.green : AppColors.red,
+              color:
+                  transactionModel.isCredit ? AppColors.green : AppColors.red,
             ),
           ),
         ],

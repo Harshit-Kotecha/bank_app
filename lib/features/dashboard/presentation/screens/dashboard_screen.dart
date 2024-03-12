@@ -2,9 +2,7 @@ import 'package:bank_app/constants/app_colors.dart';
 import 'package:bank_app/constants/assets.dart';
 import 'package:bank_app/features/dashboard/data/controller/dashboard_controller.dart';
 import 'package:bank_app/utils/dimensions.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
@@ -45,7 +43,7 @@ class DashboardScreen extends StatelessWidget {
             ),
             BottomNavigationBarItem(
               icon: SvgPicture.asset(Assets.cardSvg),
-              label: 'Cards',
+              label: 'Card',
             ),
             BottomNavigationBarItem(
               icon: SvgPicture.asset(Assets.accountSvg),

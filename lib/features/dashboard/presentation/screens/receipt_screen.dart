@@ -3,15 +3,14 @@ import 'package:bank_app/constants/assets.dart';
 import 'package:bank_app/core/custom_text.dart';
 import 'package:bank_app/core/custom_text_style.dart';
 import 'package:bank_app/features/dashboard/data/controller/dashboard_controller.dart';
+import 'package:bank_app/features/dashboard/data/controller/home_controller.dart';
 import 'package:bank_app/features/dashboard/data/controller/transfer_money_controller.dart';
 import 'package:bank_app/routing/named_routes.dart';
 import 'package:bank_app/routing/navigation_handler.dart';
 import 'package:bank_app/utils/dimensions.dart';
 import 'package:bank_app/widgets/app_elevated_button.dart';
 import 'package:bank_app/widgets/spacing.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
@@ -19,6 +18,7 @@ class ReceiptScreen extends StatelessWidget {
   ReceiptScreen({super.key});
   final TransferMoneyController transferMoneyController = Get.find();
   final DashboardController dashboardController = Get.find();
+  final HomeController homeController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,13 +54,14 @@ class ReceiptScreen extends StatelessWidget {
               height: scaleH(context, 39),
               child: CustomText(
                   text: "View Receipt",
-                  textStyle: CustomTextStyle.textStyle16Bold(context,
-                      color: AppColors.black)),
+                  textStyle: CustomTextStyle.textStyle16Bold(context)),
             ),
             AppElevatedButton(
                 title: "Close",
-                onPress: () {
+                onPress: () async {
                   dashboardController.selectedTabIndex.value = 0;
+                  await homeController.fetchRecentTransactions();
+                  await homeController.updateInfo();
                   NavigationHandler.removeAllNavigateTo(
                       NamedRoutes.dashboardScreen);
                 }),

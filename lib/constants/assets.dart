@@ -2,8 +2,9 @@ abstract class Assets {
   static const String _baseImagePath = 'assets/images';
   static const String _baseSvgPath = 'assets/svgs';
 
-  static const String splashScreen = '$_baseImagePath/splash_screen.png';
+  static const String splashScreen = '$_baseImagePath/bank_splash.png';
   static const String profileImg = '$_baseImagePath/profile.png';
+  static const String signInImg = '$_baseImagePath/sign_in.png';
 
   static const String sendSvg = '$_baseSvgPath/send.svg';
   static const String lockSvg = '$_baseSvgPath/lock.svg';
@@ -18,4 +19,7 @@ abstract class Assets {
   static const String accountSvg = '$_baseSvgPath/account.svg';
   static const String backSvg = '$_baseSvgPath/back.svg';
   static const String successSvg = '$_baseSvgPath/success.svg';
+  static const String googleSvg = '$_baseSvgPath/google.svg';
+  static const String downArrowSvg = '$_baseSvgPath/down_arrow.svg';
+  static const String mastercardSvg = '$_baseSvgPath/mastercard.svg';
 }

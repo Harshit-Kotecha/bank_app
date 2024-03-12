@@ -59,6 +59,12 @@ dependencies:
   workmanager: ^0.5.2
   flutter_eval: ^0.7.2
   intl: ^0.19.0
+  fl_chart: ^0.66.2
+  percent_indicator: ^4.2.3
+  firebase_core: ^2.25.5
+  google_sign_in: ^6.2.1
+  firebase_auth: ^4.17.6
+  flutter_local_notifications: ^17.0.0
 
 dev_dependencies:
   flutter_test:
