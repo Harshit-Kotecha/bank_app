@@ -1,5 +1,6 @@
 import 'package:bank_app/utils/shared_pref.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'interceptor/network_interceptor.dart';
 
 class DioClient {
@@ -35,13 +36,25 @@ class DioClient {
   }
 
   static Future<void> initWithAuth() async {
-    _dioWithAuth = createDio();
+    FirebaseDatabase database = FirebaseDatabase.instance;
+    DatabaseReference reference = database.ref();
+    DataSnapshot snapshot = await reference.get();
+    _dioWithAuth = createDio(
+        baseUrl: snapshot.hasChild("baseUrl")
+            ? snapshot.child("baseUrl").value.toString()
+            : null);
     _dioWithAuth!.options.headers = await getHeaders();
     _dioWithAuth!.interceptors.add(NetworkInterceptor());
   }
 
   static Future<void> initWithoutAuth() async {
-    _dioWithoutAuth = createDio();
+    FirebaseDatabase database = FirebaseDatabase.instance;
+    DatabaseReference reference = database.ref();
+    DataSnapshot snapshot = await reference.get();
+    _dioWithoutAuth = createDio(
+        baseUrl: snapshot.hasChild("baseUrl")
+            ? snapshot.child("baseUrl").value.toString()
+            : null);
     // _dioWithoutAuth!.options.headers = await getHeadersWithoutToken();
     _dioWithoutAuth!.interceptors.add(NetworkInterceptor());
   }
@@ -64,7 +77,7 @@ class DioClient {
 
   static void initBaseOption({String? baseUrl}) {
     _options = BaseOptions(
-      baseUrl: "https://d4f1-49-36-238-84.ngrok-free.app/",
+      baseUrl: baseUrl ?? "https://d4f1-49-36-238-84.ngrok-free.app/",
       connectTimeout: const Duration(milliseconds: 1000 * 120),
       receiveTimeout: const Duration(milliseconds: 12000),
       receiveDataWhenStatusError: true,
