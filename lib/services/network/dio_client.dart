@@ -64,7 +64,7 @@ class DioClient {
 
   static void initBaseOption({String? baseUrl}) {
     _options = BaseOptions(
-      baseUrl: "https://d4f1-49-36-238-84.ngrok-free.app/",
+      baseUrl: "https://691e-49-36-238-84.ngrok-free.app/",
       connectTimeout: const Duration(milliseconds: 1000 * 120),
       receiveTimeout: const Duration(milliseconds: 12000),
       receiveDataWhenStatusError: true,
