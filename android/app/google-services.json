@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "819249440938",
+    "firebase_url": "https://bank-app-56492-default-rtdb.firebaseio.com",
     "project_id": "bank-app-56492",
     "storage_bucket": "bank-app-56492.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "819249440938-6mumkloisrqid32utqm9ohva5srgf7qo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bank_app",
+            "certificate_hash": "e38a105307d043821520e92cf427d460a564cc03"
+          }
+        },
         {
           "client_id": "819249440938-u3qju60pjdkfb6ptod0hp6ldamkjpl43.apps.googleusercontent.com",
           "client_type": 1,

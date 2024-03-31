@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 void snackBar(String title, {String err = "", bool isError = false}) {
+  print("snackbar msg $err");
   final snackBar = SnackBar(
     content: Column(
       crossAxisAlignment: CrossAxisAlignment.start,

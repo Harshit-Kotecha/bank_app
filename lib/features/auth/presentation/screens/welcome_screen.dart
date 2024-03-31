@@ -38,32 +38,32 @@ class WelcomeScreen extends StatelessWidget {
                       Spacing.verticalSpacing(context, 32),
                       _signInButtons(context),
                       Spacing.verticalSpacing(context, 20),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          CustomText(
-                            text: "Already a member?",
-                            textStyle: CustomTextStyle.textStyle16Regular(
-                              context,
-                              color: AppColors.lightTitleText,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              NavigationHandler.navigateTo(
-                                  NamedRoutes.signinScreen);
-                            },
-                            child: CustomText(
-                              text: " Sign In",
-                              textStyle: CustomTextStyle.textStyle16SemiBold(
-                                context,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ],
-                      )
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.center,
+                      //   children: [
+                      //     CustomText(
+                      //       text: "Already a member?",
+                      //       textStyle: CustomTextStyle.textStyle16Regular(
+                      //         context,
+                      //         color: AppColors.lightTitleText,
+                      //       ),
+                      //       textAlign: TextAlign.center,
+                      //     ),
+                      //     GestureDetector(
+                      //       onTap: () {
+                      //         NavigationHandler.navigateTo(
+                      //             NamedRoutes.signinScreen);
+                      //       },
+                      //       child: CustomText(
+                      //         text: " Sign In",
+                      //         textStyle: CustomTextStyle.textStyle16SemiBold(
+                      //           context,
+                      //         ),
+                      //         textAlign: TextAlign.center,
+                      //       ),
+                      //     ),
+                      //   ],
+                      // )
                     ],
                   ),
                 ),
@@ -105,7 +105,7 @@ class WelcomeScreen extends StatelessWidget {
   _signInButtons(BuildContext context) {
     return Column(
       children: [
-        AppElevatedButton(title: "Create an Account", onPress: () {}),
+        // AppElevatedButton(title: "Create an Account", onPress: () {}),
         Spacing.verticalSpacing(context, 16),
         GestureDetector(
           onTap: () => _authController.signInWithGoogle(),

@@ -1,3 +1,4 @@
+import 'package:bank_app/features/auth/presentation/screens/register_screen.dart';
 import 'package:bank_app/features/auth/presentation/screens/sign_in_screen.dart';
 import 'package:bank_app/features/auth/presentation/screens/update_account.dart';
 import 'package:bank_app/features/auth/presentation/screens/welcome_screen.dart';
@@ -43,6 +44,10 @@ abstract class AppRoutes {
       GetPage(
         name: NamedRoutes.insightsScreen,
         page: () => InsightsScreen(),
+      ),
+      GetPage(
+        name: NamedRoutes.registerScreen,
+        page: () => RegisterScreen(),
       ),
     ];
   }

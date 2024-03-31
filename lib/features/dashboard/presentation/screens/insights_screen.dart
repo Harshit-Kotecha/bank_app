@@ -47,11 +47,11 @@ class InsightsScreen extends StatelessWidget {
                           .toList(),
                     ],
                   ),
-                  if (insightsController.selectedChartTab.value == 0)
+                   (insightsController.selectedChartTab.value == 0) ?
                     GraphWidget(
                       bars: insightsController.graph.value?.bars ?? [],
                     )
-                  else
+                  :
                     Column(
                       children: [
                         PieChartWidget(
@@ -148,6 +148,10 @@ class InsightsScreen extends StatelessWidget {
   }
 
   _budgetBalance(BuildContext context) {
+    var totalExpense = 0;
+     for (var element in insightsController.transactions) {
+      totalExpense += element.amount ?? 0;
+     }
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -158,7 +162,7 @@ class InsightsScreen extends StatelessWidget {
           ),
         ),
         CustomText(
-          text: "- £6570",
+          text: "- £$totalExpense",
           textStyle: CustomTextStyle.textStyle16SemiBold(
             context,
             color: AppColors.red,

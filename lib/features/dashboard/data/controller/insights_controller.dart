@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 
 class InsightsController extends BaseController {
   RxInt selectedChartTab = RxInt(0);
-  List chartTab = ["Graph", "Pie-Chart"];
+  List chartTab = ["Graph"];
 
   RxInt selectedPaymentIndex = RxInt(0);
   List paymentOptions = ["ALL", "UPI", "Credit Card"];

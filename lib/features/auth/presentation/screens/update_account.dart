@@ -1,7 +1,7 @@
-
 import 'package:bank_app/constants/assets.dart';
 import 'package:bank_app/features/auth/data/controller/auth_controller.dart';
 import 'package:bank_app/features/dashboard/presentation/widgets/progress_widget.dart';
+import 'package:bank_app/utils/dimensions.dart';
 import 'package:bank_app/widgets/app_elevated_button.dart';
 import 'package:bank_app/widgets/custom_text_field.dart';
 import 'package:bank_app/widgets/spacing.dart';
@@ -19,9 +19,8 @@ class UpdateAccount extends StatelessWidget {
       body: SafeArea(
         child: Obx(
           () => Padding(
-            padding: const EdgeInsets.symmetric(
-                // horizontal: scaleW(context, 0), vertical: scaleH(context, 0)
-                ),
+            padding: EdgeInsets.symmetric(
+                horizontal: scaleW(context, 20), vertical: scaleH(context, 20)),
             child: _authController.isLoading.value
                 ? const Center(
                     child: ProgressWidget(),
@@ -57,6 +56,10 @@ class UpdateAccount extends StatelessWidget {
                         AppElevatedButton(
                             title: "Update Account",
                             onPress: _authController.updateAccount),
+                        Spacing.verticalSpacing(context, 24),
+                        AppElevatedButton(
+                            title: "Log out",
+                            onPress: _authController.logout),
                       ],
                     ),
                   ),

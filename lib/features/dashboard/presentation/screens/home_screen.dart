@@ -9,13 +9,15 @@ import 'package:bank_app/routing/named_routes.dart';
 import 'package:bank_app/routing/navigation_handler.dart';
 import 'package:bank_app/utils/dimensions.dart';
 import 'package:bank_app/widgets/spacing.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
-
+  
   final HomeController homeController = Get.put(HomeController());
   @override
   Widget build(BuildContext context) {
@@ -34,15 +36,21 @@ class HomeScreen extends StatelessWidget {
             Spacing.verticalSpacing(context, 20),
             Obx(
               () => Expanded(
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: homeController.transactions.length,
-                  itemBuilder: (context, index) {
-                    return TransactionTile(
-                      transactionModel: homeController.transactions[index],
-                    );
-                  },
-                ),
+                child: homeController.transactions.isEmpty
+                    ? const Center(
+                        child: Text(
+                            "Make your first transaction by sending money."),
+                      )
+                    : ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: homeController.transactions.length,
+                        itemBuilder: (context, index) {
+                          return TransactionTile(
+                            transactionModel:
+                                homeController.transactions[index],
+                          );
+                        },
+                      ),
               ),
             )
           ],
@@ -122,13 +130,24 @@ class HomeScreen extends StatelessWidget {
                 ),
               ],
             ),
-            Spacing.verticalSpacing(context, 40),
+            Spacing.verticalSpacing(context, 15),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+              child: CustomText(
+                text: homeController.accountNo.value,
+                textStyle: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500),
+                maxLines: 1,
+              ),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 SvgPicture.asset(Assets.visaSvg),
                 CustomText(
-                  text: homeController.accountNo.value,
+                  text: homeController.sortCode.value,
                   textStyle: CustomTextStyle.textStyle14R(
                     context,
                     color: AppColors.white,
@@ -143,30 +162,114 @@ class HomeScreen extends StatelessWidget {
   }
 
   _cardOptions(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        IconContainer(
-          assets: Assets.sendSvg,
-          text: "Send",
-          onTap: () {},
-        ),
-        IconContainer(
-          assets: Assets.recieveSvg,
-          text: "Receive",
-          onTap: () {},
-        ),
-        IconContainer(
-          assets: Assets.lockSvg,
-          text: "LockCard",
-          onTap: () {},
-        ),
-        IconContainer(
-          assets: Assets.settingsSvg,
-          text: "Settings",
-          onTap: () {},
-        ),
-      ],
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Container(
+            width: scaleW(context, 260),
+            height: scaleH(context, 120),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(18),
+                gradient: const LinearGradient(
+                    colors: [Color(0xffE84B3A), Color(0xffF2AB49)])),
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      '50% Off',
+                      style: TextStyle(color: Colors.white, fontSize: 18),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(left: 10),
+                      padding: const EdgeInsets.all(6),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(6),
+                        color: Colors.white,
+                      ),
+                      child: const Text(
+                        'Free Delivery',
+                        style: TextStyle(
+                            color: Color(0xffE84B3A),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 12),
+                      ),
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: scaleH(context, 10),
+                ),
+                const FittedBox(
+                  child: Text(
+                    'Make Your First \nOrder Here!!!',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.only(left: 15),
+            width: scaleW(context, 260),
+            height: scaleH(context, 120),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(18),
+                gradient: const LinearGradient(
+                    colors: [Color(0xff22847F), Color(0xff4C8E82)])),
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      '30% Off',
+                      style: TextStyle(color: Colors.white, fontSize: 18),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(left: 10),
+                      padding: const EdgeInsets.all(6),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(6),
+                        color: Colors.white,
+                      ),
+                      child: const Text(
+                        'Free Delivery',
+                        style: TextStyle(
+                            color: Color(0xffE84B3A),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 12),
+                      ),
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: scaleH(context, 10),
+                ),
+                const FittedBox(
+                  child: Text(
+                    'Make Payments for your\n shopping!!!',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 
