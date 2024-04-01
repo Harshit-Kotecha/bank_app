@@ -20,6 +20,11 @@ class TransferMoneyController extends BaseController {
       snackBar("Please enter valid amount to transfer.", isError: true);
       return;
     }
+    String? balance = await SharedPref.getStringValueFor(kBalance);
+    if(textController.text.trim().isNotEmpty && ((int.tryParse(textController.text.trim()) ?? 0) > (int.tryParse(balance) ?? 0))){
+      snackBar("You don't have enough balance in your account.", isError: true);
+      return;
+    }
     isLoading.value = true;
     try {
       final id = await SharedPref.getIntValue(userKey);
