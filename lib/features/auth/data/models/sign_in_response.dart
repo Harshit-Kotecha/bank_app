@@ -31,7 +31,7 @@ class SignInResponse {
         username: json["username"],
         firstName: json["first_name"],
         lastName: json["last_name"],
-        balance: json["balance"],
+        balance: json["balance"].toString(),
         accountNumber: json["account_number"],
         sortCode: json["sort_code"],
         email: json["email"],

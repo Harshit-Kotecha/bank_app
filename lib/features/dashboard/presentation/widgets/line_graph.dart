@@ -40,6 +40,15 @@ class _LineGraphState extends State<LineGraph> {
   @override
   void initState() {
     super.initState();
+    expense = widget.data?.expense;
+    print(
+        "expense tracker ${widget.data?.expense?.totalIncome} ${widget.data?.expense?.expanse} ${widget.data?.expense?.left}");
+    expenseTracker.addAll([
+      _SalesData(
+          "Total Income", (widget.data?.expense?.totalIncome ?? 0).toDouble()),
+      _SalesData("Expense", (widget.data?.expense?.expanse ?? 0).toDouble()),
+      _SalesData("Left Over", (widget.data?.expense?.left ?? 0).toDouble()),
+    ]);
     widget.data?.transactionPerMonth?.forEach((element) {
       transactionPerMonth.add(
           _SalesData(months[element.monthNum - 1], element.value.toDouble()));
@@ -56,16 +65,7 @@ class _LineGraphState extends State<LineGraph> {
     });
     print("expense permonth ${widget.data?.expensePerMonth?.length}");
 
-    expense = widget.data?.expense;
-    print(
-        "expense tracker ${widget.data?.expense?.totalIncome} ${widget.data?.expense?.expanse} ${widget.data?.expense?.left}");
-    expenseTracker.addAll([
-      _SalesData(
-          "Total Income", (widget.data?.expense?.totalIncome ?? 0).toDouble()),
-      _SalesData("Expense", (widget.data?.expense?.expanse ?? 0).toDouble()),
-      _SalesData("Left Over", (widget.data?.expense?.left ?? 0).toDouble()),
-    ]);
-    setState(() {});
+    
   }
 
   @override

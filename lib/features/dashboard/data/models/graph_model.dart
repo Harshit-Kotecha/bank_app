@@ -45,9 +45,12 @@ class Graph {
               return ExpensePerMonth.fromJson(e);
               })
             .toList();
+    print("bar data ${json['bar']}");
     final bar = (json["bar"] as List?)?.map((e) => Bar.fromJson(e)).toList();
-
-    final month = DateFormat('MMMM').format(bar?.first.date ?? DateTime.now());
+    var month = DateFormat('MMMM').format(DateTime.now());
+    if(bar != null && bar.isNotEmpty){
+     month = DateFormat('MMMM').format(bar?.first.date ?? DateTime.now());
+    }
 
     final credit = json["pie"][0]["credit"].toDouble();
     final debit = json["pie"][1]["debit"].toDouble();

@@ -1,5 +1,7 @@
 import 'package:bank_app/features/dashboard/data/models/transaction_model.dart';
 import 'package:bank_app/features/dashboard/data/services/dashboard_service.dart';
+import 'package:bank_app/routing/named_routes.dart';
+import 'package:bank_app/routing/navigation_handler.dart';
 import 'package:bank_app/utils/base_controller.dart';
 import 'package:bank_app/utils/custom_print.dart';
 import 'package:bank_app/utils/shared_pref.dart';
@@ -28,8 +30,10 @@ class TransferMoneyController extends BaseController {
         type: "upi",
       );
 
-      await DashboardService.sendMoney(transactionModel: transactionModel);
-
+     bool? isSuccess = await DashboardService.sendMoney(transactionModel: transactionModel);
+    if(isSuccess ?? false){
+      NavigationHandler.navigateTo(NamedRoutes.receiptScreen);
+    }
       
     } catch (e) {
       printErr(e);

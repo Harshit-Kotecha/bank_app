@@ -35,7 +35,7 @@ abstract class DashboardService {
     }
   }
 
-  static Future<void> sendMoney(
+  static Future<bool?> sendMoney(
       {required TransactionModel transactionModel}) async {
     try {
       final json = await DioClient.dioWithAuth
@@ -54,15 +54,13 @@ abstract class DashboardService {
         await LocalNotificationService().showNotificationAndroid(
             "Alert!", "Your have used more then 50% of your balance please reduce your transactions.");
       }
-      final balance = await SharedPref.getStringValueFor(kBalance);
-      final remainingBalance =
-          int.parse(balance) - (transactionModel.amount ?? 0);
-      await SharedPref.saveString(kBalance, remainingBalance.toString());
+      await SharedPref.saveString(kBalance, json.data["data"]["balance"].toString());
 
-      NavigationHandler.navigateTo(NamedRoutes.receiptScreen);
+      return true;
     } catch (e) {
       printErr(e);
     }
+    return false;
   }
 
   static Future<Graph?> getGraphData() async {

@@ -52,7 +52,7 @@ class HomeController extends BaseController {
 
   Future getGraphData() async {
    data.value =  await DashboardService.getGraphData();
-   data.refresh();
+  //  data.refresh();
   }
 
   Future<void> updateInfo() async {
@@ -66,6 +66,7 @@ class HomeController extends BaseController {
     accountNo.value = formatAccountNumber(result);
 
     balance.value = await SharedPref.getStringValueFor(kBalance);
+    balance.refresh();
   }
 
   Future<void> fetchRecentTransactions() async {
