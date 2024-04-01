@@ -104,17 +104,18 @@ class AuthController extends BaseController {
 
   logout() async {
     await SharedPref.clearAllData();
+    await GoogleSignIn().signOut();
     NavigationHandler.offAllNamed(NamedRoutes.welcomeScreen);
   }
 
-  Future<void> updateAccount() async {
+  Future<void> updateAccount({bool isRegister = false}) async {
     isLoading.value = true;
 
     await AuthService.updateAccount(
       userFirstName: firstNameTextController.text,
       userLastName: lastNameTextController.text,
       accountNo: accountNoTextController.text,
-      balance: balanceTextController.text,
+      balance: isRegister ? null : balanceTextController.text,
     );
 
     isLoading.value = false;

@@ -1,8 +1,10 @@
 import 'package:bank_app/constants/app_colors.dart';
 import 'package:bank_app/core/custom_text_style.dart';
+import 'package:bank_app/features/dashboard/data/controller/home_controller.dart';
 import 'package:bank_app/features/dashboard/data/models/graph_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class LineGraph extends StatefulWidget {
@@ -45,12 +47,12 @@ class _LineGraphState extends State<LineGraph> {
     print("transaction permonth ${widget.data?.transactionPerMonth?.length}");
     widget.data?.incomePerMonth?.forEach((element) {
       incomePerMonth.add(_SalesData(months[(element.monthNum ?? 1) - 1],
-          (element.value ?? 0.toDouble()).toDouble()));
+          (element.monthIncome ?? 0.toDouble()).toDouble()));
     });
     print("income permonth ${widget.data?.incomePerMonth?.length}");
     widget.data?.expensePerMonth?.forEach((element) {
       expensePerMonth.add(_SalesData(months[(element.monthNum ?? 1) - 1],
-          (element.monthIncome ?? 0.toDouble()).toDouble()));
+          (element.value ?? 0.toDouble()).toDouble()));
     });
     print("expense permonth ${widget.data?.expensePerMonth?.length}");
 
@@ -90,7 +92,7 @@ class _LineGraphState extends State<LineGraph> {
                     ),
                   ),
                   Text(
-                    "${expense?.totalIncome}",
+                    "${expense?.totalIncome ?? Get.find<HomeController>().balance}",
                     style: CustomTextStyle.textStyle12Medium(
                       context,
                       color: AppColors.white,
@@ -115,7 +117,7 @@ class _LineGraphState extends State<LineGraph> {
                     ),
                   ),
                   Text(
-                    "${expense?.expanse}",
+                    "${expense?.expanse ?? 0}",
                     style: CustomTextStyle.textStyle12Medium(
                       context,
                       color: AppColors.white,
@@ -140,7 +142,7 @@ class _LineGraphState extends State<LineGraph> {
                     ),
                   ),
                   Text(
-                    "${expense?.left}",
+                    "${expense?.left ?? 0}",
                     style: CustomTextStyle.textStyle12Medium(
                       context,
                       color: AppColors.white,

@@ -59,7 +59,9 @@ class RegisterScreen extends StatelessWidget {
                           Spacing.verticalSpacing(context, 24),
                           AppElevatedButton(
                               title: "Register",
-                              onPress: _authController.updateAccount),
+                              onPress: (){
+                                _authController.updateAccount(isRegister: true);
+                              }),
                         ],
                       ),
                     ),

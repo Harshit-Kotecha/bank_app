@@ -33,12 +33,17 @@ class Graph {
     }).toList();
     List<IncomePerMonth> incomeList =
         List.from(json['income_per_month'])
-            .map((e) => IncomePerMonth.fromJson(e))
+            .map((e) {
+              print("income element $e");
+              return IncomePerMonth.fromJson(e);})
             .toList();
     // // print("income list ${incomeList.length}");
     List<ExpensePerMonth> expenseList =
         List.from(json['expense_per_month'])
-            .map((e) => ExpensePerMonth.fromJson(e))
+            .map((e) {
+              print("expense element $e");
+              return ExpensePerMonth.fromJson(e);
+              })
             .toList();
     final bar = (json["bar"] as List?)?.map((e) => Bar.fromJson(e)).toList();
 

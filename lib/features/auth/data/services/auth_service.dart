@@ -52,8 +52,9 @@ abstract class AuthService {
         "first_name": userFirstName,
         "last_name": userLastName,
         "account_number": accountNo,
-        "balance": balance,
-        "id": id
+        if(balance != null)
+         "balance": balance,
+        "id": id,
       });
       if (json == null) {
         throw Exception("No data recieved");
@@ -66,8 +67,6 @@ abstract class AuthService {
       await SharedPref.saveString(firstName, userFirstName ?? "");
       await SharedPref.saveString(lastName, userLastName ?? "");
       await SharedPref.saveString(kAccountNo, accountNo ?? "");
-      String? balanceValue =  await SharedPref.getStringValueFor(kBalance);
-      await SharedPref.saveString(kBalance, balance ?? balanceValue);
 
       final HomeController homeController = Get.put(HomeController());
 

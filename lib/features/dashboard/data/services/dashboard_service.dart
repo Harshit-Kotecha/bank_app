@@ -5,6 +5,7 @@ import 'package:bank_app/routing/navigation_handler.dart';
 import 'package:bank_app/services/local_notification_service.dart';
 import 'package:bank_app/services/network/dio_client.dart';
 import 'package:bank_app/utils/custom_print.dart';
+import 'package:bank_app/utils/shared_pref.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -53,6 +54,10 @@ abstract class DashboardService {
         await LocalNotificationService().showNotificationAndroid(
             "Alert!", "Your have used more then 50% of your balance please reduce your transactions.");
       }
+      final balance = await SharedPref.getStringValueFor(kBalance);
+      final remainingBalance =
+          int.parse(balance) - (transactionModel.amount ?? 0);
+      await SharedPref.saveString(kBalance, remainingBalance.toString());
 
       NavigationHandler.navigateTo(NamedRoutes.receiptScreen);
     } catch (e) {
