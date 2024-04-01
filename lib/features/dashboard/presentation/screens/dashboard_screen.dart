@@ -43,7 +43,7 @@ class DashboardScreen extends StatelessWidget {
             ),
             BottomNavigationBarItem(
               icon: SvgPicture.asset(Assets.cardSvg),
-              label: 'Card',
+              label: 'Financial Health',
             ),
             BottomNavigationBarItem(
               icon: SvgPicture.asset(Assets.accountSvg),

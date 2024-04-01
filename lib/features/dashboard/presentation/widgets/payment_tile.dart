@@ -5,6 +5,7 @@ import 'package:bank_app/features/dashboard/data/models/transaction_model.dart';
 import 'package:bank_app/utils/dimensions.dart';
 import 'package:bank_app/widgets/spacing.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class PaymentTile extends StatelessWidget {
   const PaymentTile({super.key, required this.transactionModel});
@@ -34,7 +35,7 @@ class PaymentTile extends StatelessWidget {
               ),
               Spacing.verticalSpacing(context, 4),
               CustomText(
-                text: "2024.02.18",
+                text: DateFormat("dd/mm/yyyy").format(transactionModel.createdAt ?? DateTime.now()),
                 textStyle: CustomTextStyle.textStyle10Regular(
                   context,
                   color: AppColors.f8E8E8E,

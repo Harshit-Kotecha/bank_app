@@ -5,6 +5,7 @@ class TransactionModel {
   String? type;
   String? transactionType;
   int? user;
+  DateTime? createdAt;
 
   TransactionModel(
       {this.id,
@@ -12,7 +13,7 @@ class TransactionModel {
       this.isCredit = false,
       this.type,
       this.transactionType,
-      this.user});
+      this.user, this.createdAt});
 
   factory TransactionModel.fromJson(Map<String, dynamic> json) {
     return TransactionModel(
@@ -22,6 +23,7 @@ class TransactionModel {
       type: json['type'],
       transactionType: json['transaction_type'],
       user: json['user'],
+      createdAt : DateTime.parse(json['created_at'])
     );
   }
 

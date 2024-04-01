@@ -6,7 +6,7 @@ import 'package:bank_app/utils/base_controller.dart';
 import 'package:get/get.dart';
 
 class DashboardController extends BaseController {
-  RxInt selectedTabIndex = RxInt(3);
+  RxInt selectedTabIndex = RxInt(0);
 
   final widgetOptions = [
     HomeScreen(),

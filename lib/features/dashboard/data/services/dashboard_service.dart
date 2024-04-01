@@ -5,7 +5,9 @@ import 'package:bank_app/routing/navigation_handler.dart';
 import 'package:bank_app/services/local_notification_service.dart';
 import 'package:bank_app/services/network/dio_client.dart';
 import 'package:bank_app/utils/custom_print.dart';
+import 'package:bank_app/utils/shared_pref.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 abstract class DashboardService {
   static Future<List<TransactionModel>> getTransactionData({
@@ -20,6 +22,7 @@ abstract class DashboardService {
         "page_number": page,
         "type": type,
       });
+      print("transaction list $json");
       final data = json?.data?["data"]?["listing"] as List;
 
       final List<TransactionModel> result = [];
@@ -32,7 +35,7 @@ abstract class DashboardService {
     }
   }
 
-  static Future<void> sendMoney(
+  static Future<bool?> sendMoney(
       {required TransactionModel transactionModel}) async {
     try {
       final json = await DioClient.dioWithAuth
@@ -46,29 +49,33 @@ abstract class DashboardService {
         throw Exception("Couldn't make the payment");
       }
       FocusManager.instance.primaryFocus?.unfocus();
-
+      print("payment response ${json.data["data"]}");
       if (json.data["data"]["alert"]) {
         await LocalNotificationService().showNotificationAndroid(
-            "Alert!", "You have exceeded the amount limit");
+            "Alert!", "Your have used more then 50% of your balance please reduce your transactions.");
       }
+      await SharedPref.saveString(kBalance, json.data["data"]["balance"].toString());
 
-      NavigationHandler.navigateTo(NamedRoutes.receiptScreen);
+      return true;
     } catch (e) {
       printErr(e);
     }
+    return false;
   }
 
   static Future<Graph?> getGraphData() async {
     try {
       final json = await DioClient.dioWithAuth?.get("/bank/transaction/graph");
-
       if (json == null || (json.statusCode != 200 && json.statusCode != 201)) {
         return null;
       }
-
+      try{
       final data = Graph.fromJson(json.data["data"]);
-
       return data;
+      } catch(e){
+        print("error in graph $e");
+      }
+      return null;
     } catch (e) {
       return null;
     }
